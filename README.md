@@ -1,6 +1,10 @@
 # ExProcess
 
-**TODO: Add description**
+[![Build Status](https://travis-ci.org/brain-geek/ex_process.svg?branch=master)](https://travis-ci.org/brain-geek/ex_process)
+
+This project is intended to implement a BPM runner in Elixir language.
+
+While it isn't planned to be as feature-packed as available enterprise competitors, it is intended to be flexible, configurable and easy to start.
 
 ## Installation
 
