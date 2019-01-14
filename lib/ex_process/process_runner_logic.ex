@@ -8,7 +8,8 @@ defmodule ExProcess.ProcessRunnerLogic do
     ExProcess.ProcessRunnerParts.MessageCatcher,
     ExProcess.ProcessRunnerParts.TaskRunner,
     ExProcess.ProcessRunnerParts.MessageThrower,
-    ExProcess.ProcessRunnerParts.FlowsNextNodesActivator
+    ExProcess.ProcessRunnerParts.FlowsNextNodesActivator,
+    ExProcess.ProcessRunnerParts.NewTickStarter
   ]
 
   def start(opts = %{process: _, process_name: _}) do
@@ -20,7 +21,6 @@ defmodule ExProcess.ProcessRunnerLogic do
   def process_tick(state) do
     @parts_list
     |> Enum.reduce(state, fn part, st -> part.process_tick(st) end)
-    |> (&Map.merge(&1, %{active_nodes: &1[:active_next_tick], active_next_tick: []})).()
   end
 
   def process_message(state, msg) do
