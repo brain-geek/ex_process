@@ -23,7 +23,7 @@ defmodule ExProcess.ProcessSupervisor do
   end
 
   def run(process, opts) do
-    child_spec = {ExProcess.ProcessRunner, Map.merge(%{process: process}, opts)}
+    child_spec = {ExProcess.RunnerProcess, Map.merge(%{process: process}, opts)}
     DynamicSupervisor.start_child(__MODULE__, child_spec)
   end
 

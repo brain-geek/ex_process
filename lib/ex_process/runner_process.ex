@@ -1,4 +1,4 @@
-defmodule ExProcess.ProcessRunner do
+defmodule ExProcess.RunnerProcess do
   @moduledoc """
   GenServer which actually runs separate BPM process.
   """
