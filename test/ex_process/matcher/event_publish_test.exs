@@ -70,7 +70,12 @@ defmodule ExProcess.Matcher.EventPublishTest do
 
     test "works with multiple subscriptions" do
       ExProcess.Matcher.EventPublish.register_matcher("Publishme 34", :test_channel)
-      ExProcess.Matcher.EventPublish.register_matcher(~r/Publishme (?<name>[\w\s]+)/, :other_channel)
+
+      ExProcess.Matcher.EventPublish.register_matcher(
+        ~r/Publishme (?<name>[\w\s]+)/,
+        :other_channel
+      )
+
       ExProcess.PubSub.subscribe(self(), :test_channel)
       ExProcess.PubSub.subscribe(self(), :other_channel)
 

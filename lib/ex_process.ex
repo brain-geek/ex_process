@@ -9,31 +9,19 @@ defmodule ExProcess do
 
     ## Examples
 
-        iex> {:ok, pid} = ExProcess.run(File.stream!("./test/fixtures/only_start_looped.bpmn", [], 2048), %{process_name: "Doctest"})
+        iex> {:ok, pid} = ExProcess.run(File.read!("./test/fixtures/only_start_looped.bpmn"), %{process_name: "Doctest"})
         iex> is_pid(pid)
         true
 
   """
 
-  def run(process) do
-    run(process, %{})
-  end
+  def run(process, opts \\ %{}) do
+    case ExProcess.Runnable.to_process(process) do
+      {:ok, process_struct} ->
+        ExProcess.ProcessSupervisor.run(process_struct, opts)
 
-  def run(process = %ExProcess.Process{}, opts) do
-    ExProcess.ProcessSupervisor.run(process, opts)
-  end
-
-  def run(xml, opts) do
-    case ExProcess.Parser.parse(xml) do
-      {:ok, %ExProcess.Process{events: events}}
-      when is_list(events) and events == [] ->
-        {:error, "Unable to use XML with no starts"}
-
-      {:ok, parsed_process = %ExProcess.Process{}} ->
-        run(parsed_process, opts)
-
-      error_output ->
-        error_output
+      {:error, error} ->
+        {:error, error}
     end
   end
 end

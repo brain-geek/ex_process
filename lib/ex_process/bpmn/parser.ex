@@ -1,4 +1,4 @@
-defmodule ExProcess.Parser do
+defmodule ExProcess.Bpmn.Parser do
   @moduledoc """
   Parser of .bpmn files into ExProcess.Process struct.
   """

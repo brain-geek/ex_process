@@ -22,7 +22,7 @@ defmodule ExProcess.TestTools do
   end
 
   def parsed_fixture(name) do
-    {:ok, process} = name |> fixture() |> ExProcess.Parser.parse()
+    {:ok, process} = name |> fixture() |> ExProcess.Bpmn.Parser.parse()
     process
   end
 end

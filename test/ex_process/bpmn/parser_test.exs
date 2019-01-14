@@ -1,17 +1,17 @@
-defmodule ExProcess.ParserTest do
+defmodule ExProcess.Bpmn.ParserTest do
   use ExUnit.Case, async: true
   import ExUnit.CaptureLog
 
   describe "parse" do
     test "it fails when XML is mailformed" do
       capture_log(fn ->
-        assert(ExProcess.Parser.parse("Hello world") == {:error, "Unable to parse XML"})
+        assert(ExProcess.Bpmn.Parser.parse("Hello world") == {:error, "Unable to parse XML"})
       end)
     end
 
     test "it fails when no elements found" do
       assert(
-        ExProcess.Parser.parse(~s(<?xml version="1.0" encoding="UTF-8"?><a></a>)) ==
+        ExProcess.Bpmn.Parser.parse(~s(<?xml version="1.0" encoding="UTF-8"?><a></a>)) ==
           {:error, "Unable to find process element"}
       )
     end
@@ -20,7 +20,7 @@ defmodule ExProcess.ParserTest do
       xml = ExProcess.TestTools.fixture("no_start")
 
       assert(
-        ExProcess.Parser.parse(xml) ==
+        ExProcess.Bpmn.Parser.parse(xml) ==
           {:ok,
            %ExProcess.Process{
              id: "Process_1nm1w9v",
@@ -33,7 +33,7 @@ defmodule ExProcess.ParserTest do
       xml = ExProcess.TestTools.fixture("only_interim_event")
 
       assert(
-        ExProcess.Parser.parse(xml) ==
+        ExProcess.Bpmn.Parser.parse(xml) ==
           {:ok,
            %ExProcess.Process{
              events: [
@@ -52,7 +52,7 @@ defmodule ExProcess.ParserTest do
       xml = ExProcess.TestTools.fixture("small")
 
       assert(
-        ExProcess.Parser.parse(xml) ==
+        ExProcess.Bpmn.Parser.parse(xml) ==
           {:ok,
            %ExProcess.Process{
              id: "Process_0829syz",
@@ -64,9 +64,14 @@ defmodule ExProcess.ParserTest do
                }
              ],
              events: [
-               %ExProcess.Process.StartEvent{id: "StartEvent_1x0nb4n", name: "Switch state changed"}
+               %ExProcess.Process.StartEvent{
+                 id: "StartEvent_1x0nb4n",
+                 name: "Switch state changed"
+               }
              ],
-             activities: [%ExProcess.Process.Task{id: "Task_1gy68eb", name: "Switch off lightbulb 0"}]
+             activities: [
+               %ExProcess.Process.Task{id: "Task_1gy68eb", name: "Switch off lightbulb 0"}
+             ]
            }}
       )
     end
@@ -75,7 +80,7 @@ defmodule ExProcess.ParserTest do
       xml = ExProcess.TestTools.fixture("start-parallel-end")
 
       assert(
-        ExProcess.Parser.parse(xml) ==
+        ExProcess.Bpmn.Parser.parse(xml) ==
           {:ok,
            %ExProcess.Process{
              flows: [
@@ -124,7 +129,7 @@ defmodule ExProcess.ParserTest do
       xml = ExProcess.TestTools.fixture("message-throw-catch")
 
       assert(
-        ExProcess.Parser.parse(xml) ==
+        ExProcess.Bpmn.Parser.parse(xml) ==
           {:ok,
            %ExProcess.Process{
              flows: [],

@@ -12,7 +12,10 @@ defmodule ExProcess.Matcher.TaskTest do
   end
 
   test "saves matchers" do
-    ExProcess.Matcher.Task.register_matcher(~r/Enable light switch (?<name>\w+)/, ExProcess.TestMatcher)
+    ExProcess.Matcher.Task.register_matcher(
+      ~r/Enable light switch (?<name>\w+)/,
+      ExProcess.TestMatcher
+    )
 
     assert(
       ExProcess.Matcher.Task.take_all() ==
@@ -28,11 +31,16 @@ defmodule ExProcess.Matcher.TaskTest do
     test "matches string matchers" do
       ExProcess.Matcher.Task.register_matcher("Do stuff", ExProcess.TestMatcher)
 
-      assert(ExProcess.Matcher.Task.match("Do stuff") == {:ok, [{"Do stuff", ExProcess.TestMatcher}]})
+      assert(
+        ExProcess.Matcher.Task.match("Do stuff") == {:ok, [{"Do stuff", ExProcess.TestMatcher}]}
+      )
     end
 
     test "matches regexp matchers" do
-      ExProcess.Matcher.Task.register_matcher(~r/Enable light switch (?<name>\w+)/, ExProcess.TestMatcher)
+      ExProcess.Matcher.Task.register_matcher(
+        ~r/Enable light switch (?<name>\w+)/,
+        ExProcess.TestMatcher
+      )
 
       assert(
         ExProcess.Matcher.Task.match("Enable light switch 6") ==

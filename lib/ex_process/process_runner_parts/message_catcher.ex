@@ -1,4 +1,9 @@
 defmodule ExProcess.ProcessRunnerParts.MessageCatcher do
+  @moduledoc """
+    This is part of Process Runner which handles MessageCatchEvent
+    nodes, i.e. catches messages sent to ExProcess internal PubSub
+  """
+
   @state_path :message_catcher
 
   def start(opts = %{process: process}) do

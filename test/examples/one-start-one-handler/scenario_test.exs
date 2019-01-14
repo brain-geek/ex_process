@@ -18,7 +18,7 @@ defmodule ExProcess.OneStartOneHandlerTest do
     ExProcess.PubSub.subscribe(self(), {:test, :test})
 
     # Run the BPM
-    {:ok, xml} = "#{__DIR__}/diagram.bpmn" |> File.read!() |> ExProcess.Parser.parse()
+    {:ok, xml} = "#{__DIR__}/diagram.bpmn" |> File.read!() |> ExProcess.Bpmn.Parser.parse()
     {:ok, _} = ExProcess.ProcessSupervisor.run(xml, %{process_name: "Flow"})
 
     # It should proceed to running handler right after start and therefor receive this message

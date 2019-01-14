@@ -1,4 +1,9 @@
 defmodule ExProcess.ProcessRunnerParts.FlowsNextNodesActivator do
+  @moduledoc """
+    This is part of Process Runner which marks nodes connected by flows
+    to be active in the next tick
+  """
+
   def start(state = %{}) do
     state
   end

@@ -1,4 +1,8 @@
 defmodule ExProcess.ProcessRunnerParts.StartViaStartNodes do
+  @moduledoc """
+    This is part of Process Runner which initializes start nodes for the first tick
+  """
+
   def start(opts = %{process: process, process_name: _}) do
     start_node_ids =
       process.events

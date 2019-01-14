@@ -1,4 +1,9 @@
 defmodule ExProcess.ProcessRunnerParts.MessageThrower do
+  @moduledoc """
+    This is part of Process Runner which handles MessageThrowEvent
+    nodes, i.e. throws messages to ExProcess internal PubSub
+  """
+
   def start(state = %{}) do
     state
   end

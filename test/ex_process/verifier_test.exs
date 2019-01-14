@@ -8,7 +8,7 @@ defmodule ExProcess.VerifierTest do
         assert(
           fixture_name
           |> ExProcess.TestTools.fixture()
-          |> ExProcess.Parser.parse()
+          |> ExProcess.Bpmn.Parser.parse()
           |> elem(1)
           |> ExProcess.Verifier.check()
         )
@@ -19,7 +19,7 @@ defmodule ExProcess.VerifierTest do
       "examples/*/*.bpmn"
       |> Path.wildcard()
       |> Enum.each(fn file_path ->
-        {:ok, xml} = file_path |> File.read!() |> ExProcess.Parser.parse()
+        {:ok, xml} = file_path |> File.read!() |> ExProcess.Bpmn.Parser.parse()
 
         assert(ExProcess.Verifier.check(xml))
       end)
@@ -57,7 +57,8 @@ defmodule ExProcess.VerifierTest do
         ]
       }
 
-      assert ExProcess.Verifier.check(process) == {:error, "missing elements found", ["Task_1gy68eb"]}
+      assert ExProcess.Verifier.check(process) ==
+               {:error, "missing elements found", ["Task_1gy68eb"]}
     end
 
     test "negative case - end event missing" do

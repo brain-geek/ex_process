@@ -24,7 +24,10 @@ defmodule ExProcess.PubSubTest do
   test "publish via regexp" do
     ExProcess.PubSub.subscribe(self(), {:test, :regexp})
 
-    ExProcess.Matcher.EventPublish.register_matcher(~r/Enable (?<name>\w+) stuff/, {:test, :regexp})
+    ExProcess.Matcher.EventPublish.register_matcher(
+      ~r/Enable (?<name>\w+) stuff/,
+      {:test, :regexp}
+    )
 
     ExProcess.PubSub.broadcast("Enable some stuff")
 
@@ -43,7 +46,11 @@ defmodule ExProcess.PubSubTest do
     ExProcess.Matcher.EventPublish.register_matcher("Get me something nice", {:test, :channel2})
 
     ExProcess.PubSub.broadcast("Get me something nice")
-    assert_received %ExProcess.PubSub.Message{channel: {:test, :channel1}, info: %{"name" => "nice"}}
+
+    assert_received %ExProcess.PubSub.Message{
+      channel: {:test, :channel1},
+      info: %{"name" => "nice"}
+    }
 
     assert_received %ExProcess.PubSub.Message{
       channel: {:test, :channel2},

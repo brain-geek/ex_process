@@ -1,4 +1,8 @@
 defmodule ExProcess.ProcessRunnerParts.TaskRunner do
+  @moduledoc """
+    This is part of Process Runner which does tasks execution
+  """
+
   def start(state = %{}) do
     state
   end

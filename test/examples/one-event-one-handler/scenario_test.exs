@@ -21,7 +21,7 @@ defmodule ExProcess.OneEventOneHandlerTest do
     ExProcess.Matcher.EventReceive.register_matcher("Test Event", :start)
 
     # Run the BPM
-    {:ok, xml} = "#{__DIR__}/diagram.bpmn" |> File.read!() |> ExProcess.Parser.parse()
+    {:ok, xml} = "#{__DIR__}/diagram.bpmn" |> File.read!() |> ExProcess.Bpmn.Parser.parse()
     {:ok, _} = ExProcess.ProcessSupervisor.run(xml, %{process_name: "Flow"})
 
     # # Started with no start nodes
