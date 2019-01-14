@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" targetNamespace="" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL http://www.omg.org/spec/BPMN/2.0/20100501/BPMN20.xsd">
+  <collaboration id="sid-c0e745ff-361e-4afb-8c8d-2a1fc32b1424">
+    <participant id="sid-87F4C1D6-25E1-4A45-9DA7-AD945993D06F" name="Customer" processRef="sid-C3803939-0872-457F-8336-EAE484DC4A04" />
+  </collaboration>
+  <process id="sid-C3803939-0872-457F-8336-EAE484DC4A04" name="Customer" processType="None" isClosed="false" isExecutable="false">
+    <extensionElements />
+    <startEvent id="StartEvent_1whl2cu">
+      <outgoing>SequenceFlow_0dphyxp</outgoing>
+    </startEvent>
+    <task id="Task_0dzv2cn" name="Test handler">
+      <incoming>SequenceFlow_0dphyxp</incoming>
+    </task>
+    <sequenceFlow id="SequenceFlow_0dphyxp" sourceRef="StartEvent_1whl2cu" targetRef="Task_0dzv2cn" />
+  </process>
+  <bpmndi:BPMNDiagram id="sid-74620812-92c4-44e5-949c-aa47393d3830">
+    <bpmndi:BPMNPlane id="sid-cdcae759-2af7-4a6d-bd02-53f3352a731d" bpmnElement="sid-c0e745ff-361e-4afb-8c8d-2a1fc32b1424">
+      <bpmndi:BPMNShape id="sid-87F4C1D6-25E1-4A45-9DA7-AD945993D06F_gui" bpmnElement="sid-87F4C1D6-25E1-4A45-9DA7-AD945993D06F" isHorizontal="true">
+        <omgdc:Bounds x="83" y="105" width="933" height="250" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="StartEvent_1whl2cu_di" bpmnElement="StartEvent_1whl2cu">
+        <omgdc:Bounds x="233" y="221" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_0dzv2cn_di" bpmnElement="Task_0dzv2cn">
+        <omgdc:Bounds x="492" y="199" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0dphyxp_di" bpmnElement="SequenceFlow_0dphyxp">
+        <di:waypoint x="269" y="239" />
+        <di:waypoint x="492" y="239" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

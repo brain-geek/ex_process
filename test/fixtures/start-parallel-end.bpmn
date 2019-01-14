@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_102s7va" targetNamespace="http://bpmn.io/schema/bpmn">
+  <process id="Process_1" isExecutable="false">
+    <startEvent id="StartEvent_1" name="Start 1">
+      <outgoing>SequenceFlow_1sh87mv</outgoing>
+    </startEvent>
+    <task id="Task_1jo73o5" name="Task">
+      <incoming>SequenceFlow_1sttm64</incoming>
+      <outgoing>SequenceFlow_0d99rmu</outgoing>
+    </task>
+    <sequenceFlow id="SequenceFlow_1sh87mv" sourceRef="StartEvent_1" targetRef="ExclusiveGateway_0169psm" />
+    <endEvent id="EndEvent_0p6f41t" name="The end">
+      <incoming>SequenceFlow_0d99rmu</incoming>
+    </endEvent>
+    <sequenceFlow id="SequenceFlow_0d99rmu" sourceRef="Task_1jo73o5" targetRef="EndEvent_0p6f41t" />
+    <startEvent id="StartEvent_07knhrl" name="Start 2">
+      <outgoing>SequenceFlow_0ku3eag</outgoing>
+    </startEvent>
+    <exclusiveGateway id="ExclusiveGateway_0169psm" name="Parallel Gateway - converging">
+      <incoming>SequenceFlow_0ku3eag</incoming>
+      <incoming>SequenceFlow_1sh87mv</incoming>
+      <outgoing>SequenceFlow_1sttm64</outgoing>
+    </exclusiveGateway>
+    <sequenceFlow id="SequenceFlow_0ku3eag" sourceRef="StartEvent_07knhrl" targetRef="ExclusiveGateway_0169psm" />
+    <sequenceFlow id="SequenceFlow_1sttm64" sourceRef="ExclusiveGateway_0169psm" targetRef="Task_1jo73o5" />
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_1">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="170" y="102" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="172" y="145" width="33" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_1jo73o5_di" bpmnElement="Task_1jo73o5">
+        <dc:Bounds x="407" y="121" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_1sh87mv_di" bpmnElement="SequenceFlow_1sh87mv">
+        <di:waypoint x="206" y="120" />
+        <di:waypoint x="271" y="120" />
+        <di:waypoint x="271" y="161" />
+        <di:waypoint x="303" y="161" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="EndEvent_0p6f41t_di" bpmnElement="EndEvent_0p6f41t">
+        <dc:Bounds x="636" y="143" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="634" y="186" width="41" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0d99rmu_di" bpmnElement="SequenceFlow_0d99rmu">
+        <di:waypoint x="507" y="161" />
+        <di:waypoint x="636" y="161" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="StartEvent_07knhrl_di" bpmnElement="StartEvent_07knhrl">
+        <dc:Bounds x="170" y="206" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="172" y="249" width="33" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ExclusiveGateway_0169psm_di" bpmnElement="ExclusiveGateway_0169psm" isMarkerVisible="true">
+        <dc:Bounds x="303" y="136" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="286" y="106" width="84" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0ku3eag_di" bpmnElement="SequenceFlow_0ku3eag">
+        <di:waypoint x="206" y="224" />
+        <di:waypoint x="328" y="224" />
+        <di:waypoint x="328" y="186" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_1sttm64_di" bpmnElement="SequenceFlow_1sttm64">
+        <di:waypoint x="353" y="161" />
+        <di:waypoint x="407" y="161" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

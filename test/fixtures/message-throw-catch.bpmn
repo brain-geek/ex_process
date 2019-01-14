@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" targetNamespace="" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL http://www.omg.org/spec/BPMN/2.0/20100501/BPMN20.xsd">
+  <collaboration id="sid-c0e745ff-361e-4afb-8c8d-2a1fc32b1424">
+    <participant id="sid-87F4C1D6-25E1-4A45-9DA7-AD945993D06F" name="Customer" processRef="sid-C3803939-0872-457F-8336-EAE484DC4A04" />
+  </collaboration>
+  <process id="sid-C3803939-0872-457F-8336-EAE484DC4A04" name="Customer" processType="None" isClosed="false" isExecutable="false">
+    <extensionElements />
+    <intermediateThrowEvent id="IntermediateThrowEvent_0vky209" name="Something sent here">
+      <messageEventDefinition />
+    </intermediateThrowEvent>
+    <intermediateCatchEvent id="IntermediateCatchEvent_12ds6wx" name="Something received here">
+      <messageEventDefinition />
+    </intermediateCatchEvent>
+  </process>
+  <bpmndi:BPMNDiagram id="sid-74620812-92c4-44e5-949c-aa47393d3830">
+    <bpmndi:BPMNPlane id="sid-cdcae759-2af7-4a6d-bd02-53f3352a731d" bpmnElement="sid-c0e745ff-361e-4afb-8c8d-2a1fc32b1424">
+      <bpmndi:BPMNShape id="sid-87F4C1D6-25E1-4A45-9DA7-AD945993D06F_gui" bpmnElement="sid-87F4C1D6-25E1-4A45-9DA7-AD945993D06F" isHorizontal="true">
+        <omgdc:Bounds x="83" y="105" width="933" height="250" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="IntermediateThrowEvent_0w3lozc_di" bpmnElement="IntermediateThrowEvent_0vky209">
+        <omgdc:Bounds x="274" y="199" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="254" y="242" width="77" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="IntermediateCatchEvent_0x9e09y_di" bpmnElement="IntermediateCatchEvent_12ds6wx">
+        <omgdc:Bounds x="477" y="199" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="462" y="242" width="67" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

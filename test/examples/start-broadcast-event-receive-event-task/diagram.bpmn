@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" targetNamespace="" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL http://www.omg.org/spec/BPMN/2.0/20100501/BPMN20.xsd">
+  <collaboration id="sid-c0e745ff-361e-4afb-8c8d-2a1fc32b1424">
+    <participant id="sid-87F4C1D6-25E1-4A45-9DA7-AD945993D06F" processRef="sid-C3803939-0872-457F-8336-EAE484DC4A04" />
+  </collaboration>
+  <process id="sid-C3803939-0872-457F-8336-EAE484DC4A04" name="Customer" processType="None" isClosed="false" isExecutable="false">
+    <extensionElements />
+    <endEvent id="EndEvent_0kg1wao" name="The end">
+      <incoming>SequenceFlow_0hg818q</incoming>
+    </endEvent>
+    <task id="Task_1cinxwy" name="Triggered via broadcast">
+      <incoming>SequenceFlow_09n27jx</incoming>
+      <outgoing>SequenceFlow_0hg818q</outgoing>
+    </task>
+    <startEvent id="StartEvent_15cpyxx" name="The start">
+      <outgoing>SequenceFlow_0d97z89</outgoing>
+    </startEvent>
+    <sequenceFlow id="SequenceFlow_0d97z89" sourceRef="StartEvent_15cpyxx" targetRef="IntermediateThrowEvent_0wmk63x" />
+    <sequenceFlow id="SequenceFlow_09n27jx" sourceRef="IntermediateThrowEvent_0fu6c0f" targetRef="Task_1cinxwy" />
+    <sequenceFlow id="SequenceFlow_0hg818q" sourceRef="Task_1cinxwy" targetRef="EndEvent_0kg1wao" />
+    <intermediateThrowEvent id="IntermediateThrowEvent_0wmk63x" name="Broadcast event">
+      <incoming>SequenceFlow_0d97z89</incoming>
+      <messageEventDefinition />
+    </intermediateThrowEvent>
+    <intermediateCatchEvent id="IntermediateThrowEvent_0fu6c0f" name="Broadcast receiver">
+      <outgoing>SequenceFlow_09n27jx</outgoing>
+      <messageEventDefinition />
+    </intermediateCatchEvent>
+  </process>
+  <bpmndi:BPMNDiagram id="sid-74620812-92c4-44e5-949c-aa47393d3830">
+    <bpmndi:BPMNPlane id="sid-cdcae759-2af7-4a6d-bd02-53f3352a731d" bpmnElement="sid-c0e745ff-361e-4afb-8c8d-2a1fc32b1424">
+      <bpmndi:BPMNShape id="sid-87F4C1D6-25E1-4A45-9DA7-AD945993D06F_gui" bpmnElement="sid-87F4C1D6-25E1-4A45-9DA7-AD945993D06F" isHorizontal="true">
+        <omgdc:Bounds x="83" y="105" width="933" height="250" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_0kg1wao_di" bpmnElement="EndEvent_0kg1wao">
+        <omgdc:Bounds x="771" y="136" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="769" y="179" width="41" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_1cinxwy_di" bpmnElement="Task_1cinxwy">
+        <omgdc:Bounds x="599" y="114" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="StartEvent_15cpyxx_di" bpmnElement="StartEvent_15cpyxx">
+        <omgdc:Bounds x="151" y="252" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="147" y="295" width="44" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0d97z89_di" bpmnElement="SequenceFlow_0d97z89">
+        <di:waypoint x="187" y="270" />
+        <di:waypoint x="366" y="270" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_09n27jx_di" bpmnElement="SequenceFlow_09n27jx">
+        <di:waypoint x="514" y="154" />
+        <di:waypoint x="599" y="154" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_0hg818q_di" bpmnElement="SequenceFlow_0hg818q">
+        <di:waypoint x="699" y="154" />
+        <di:waypoint x="771" y="154" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="IntermediateThrowEvent_1rtbkw7_di" bpmnElement="IntermediateThrowEvent_0wmk63x">
+        <omgdc:Bounds x="366" y="252" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="344" y="295" width="80" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="IntermediateCatchEvent_0o1jun4_di" bpmnElement="IntermediateThrowEvent_0fu6c0f">
+        <omgdc:Bounds x="478" y="136" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="456" y="179" width="81" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>
