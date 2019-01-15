@@ -1,6 +1,6 @@
 # ExProcess
 
-[![Build Status](https://travis-ci.org/brain-geek/ex_process.svg?branch=master)](https://travis-ci.org/brain-geek/ex_process)
+[![Build Status](https://travis-ci.org/brain-geek/ex_process.svg?branch=master)](https://travis-ci.org/brain-geek/ex_process) [![Coverage Status](https://coveralls.io/repos/github/brain-geek/ex_process/badge.svg?branch=master)](https://coveralls.io/github/brain-geek/ex_process?branch=master)
 
 This project is intended to implement a BPM runner in Elixir language.
 
