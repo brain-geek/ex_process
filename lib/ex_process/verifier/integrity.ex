@@ -3,7 +3,7 @@ defmodule ExProcess.Verifier.Integrity do
   Checks integrity provided ExProcess.Process .
   """
 
-  @doc "Verifies integrity of given BPMN. Checks whether all links point to existing elements"
+  @doc "Verifies integrity of given process. Checks whether all links point to existing elements"
   def check(process_struct = %ExProcess.Process{}) do
     elements =
       List.flatten([

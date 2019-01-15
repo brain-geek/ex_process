@@ -1,11 +1,12 @@
 defmodule ExProcess do
   @moduledoc """
-  BPMN entry point.
+  ExProcess entry point.
 
-  This project allows running code orchestrated via BPMN diagrams.
+  This project allows running code orchestrated via business logic diagrams.
+
   """
   @doc """
-    Launches provided BPMN process
+    Launches provided process
 
     ## Examples
 

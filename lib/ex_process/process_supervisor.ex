@@ -1,8 +1,8 @@
 defmodule ExProcess.ProcessSupervisor do
   @moduledoc """
-  BPMN processes supervisor.
+    RunnerProcess processes supervisor.
 
-  Is parent to all processes started by ExProcess.run
+    Is parent to all processes started by ExProcess.run
   """
 
   @process_registry ExProcess.ProcessRegistry

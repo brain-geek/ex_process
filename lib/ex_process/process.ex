@@ -1,6 +1,6 @@
 defmodule ExProcess.Process do
   @moduledoc """
-  Struct to store BPMN process.
+  Struct to store process.
   """
   @enforce_keys [:id]
   defstruct name: "",
@@ -15,7 +15,7 @@ defmodule ExProcess.Process do
             # See https://www.lucidchart.com/pages/bpmn-event-types for examples
             # Basically, there are three kinds of events:
             # - Start event: is active when process starts;
-            #   While "proper" BPMN requires start event to be present,
+            #   While "proper" business process requires start event to be present,
             #   we don't verify it for more flexibility
             # - Intermediate events: messages received/sent as a part of process
             # - End events: generally end the process
@@ -24,7 +24,7 @@ defmodule ExProcess.Process do
 
   defmodule Task do
     @moduledoc """
-    Struct to store BPMN process part: separate task.
+    Struct to store process part: separate task.
     """
 
     @enforce_keys [:id]
@@ -33,7 +33,7 @@ defmodule ExProcess.Process do
 
   defmodule MessageThrowEvent do
     @moduledoc """
-    Struct to store BPMN process part: message throw event.
+    Struct to store process part: message throw event.
 
     They are mostly triggered from outside the process.
     """
@@ -44,7 +44,7 @@ defmodule ExProcess.Process do
 
   defmodule MessageCatchEvent do
     @moduledoc """
-    Struct to store BPMN process part: message catch event.
+    Struct to store process part: message catch event.
 
     They are mostly triggered from outside the process.
     """
@@ -55,7 +55,7 @@ defmodule ExProcess.Process do
 
   defmodule StartEvent do
     @moduledoc """
-    Struct to store BPMN process part: start event.
+    Struct to store process part: start event.
 
     When starting, all start events will start by being active
     """
@@ -66,7 +66,7 @@ defmodule ExProcess.Process do
 
   defmodule EndEvent do
     @moduledoc """
-    Struct to store BPMN process part: end event.
+    Struct to store process part: end event.
     """
 
     @enforce_keys [:id]
@@ -75,7 +75,7 @@ defmodule ExProcess.Process do
 
   defmodule ExclusiveGateway do
     @moduledoc """
-    Struct to store BPMN process part: exclusive gateway.
+    Struct to store process part: exclusive gateway.
     """
 
     @enforce_keys [:id]
@@ -84,7 +84,7 @@ defmodule ExProcess.Process do
 
   defmodule Flow do
     @moduledoc """
-    Struct to store BPMN process part: flow.
+    Struct to store process part: flow.
 
     Flow is a link between two states.
     """
