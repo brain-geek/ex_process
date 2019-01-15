@@ -1,4 +1,4 @@
-defmodule ExProcess.StartBroadcastEventReceiveEventTask do
+defmodule ExProcess.PubSubExampleTest do
   use ExUnit.Case
 
   setup do

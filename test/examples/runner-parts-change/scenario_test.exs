@@ -1,4 +1,4 @@
-defmodule ExProcess.RunnerPartsChange do
+defmodule ExProcess.RunnerPartsChangeExampleTest do
   @moduledoc """
     This is based off TickByTickUsageExampleTest, but the difference is that
     due to FlowsNextNodesActivator removed, the second node isn't activated

@@ -1,4 +1,4 @@
-defmodule ExProcess.OneEventOneHandlerTest do
+defmodule ExProcess.OneEventOneHandlerExampleTest do
   use ExUnit.Case
 
   setup do
