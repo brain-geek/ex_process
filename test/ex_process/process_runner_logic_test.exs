@@ -60,7 +60,8 @@ defmodule ExProcess.ProcessRunnerLogicTest do
               {"IntermediateThrowEvent_1pfwjvv", :start},
               {"IntermediateThrowEvent_1pfwajzz", :finish, &(&1 == "should make it")}
             ]
-          }
+          },
+          parts_list: ExProcess.ProcessRunnerLogic.default_parts_list()
         }
       }
     end
