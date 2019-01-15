@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" targetNamespace="" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL http://www.omg.org/spec/BPMN/2.0/20100501/BPMN20.xsd">
+  <collaboration id="sid-c0e745ff-361e-4afb-8c8d-2a1fc32b1424">
+    <participant id="sid-87F4C1D6-25E1-4A45-9DA7-AD945993D06F" processRef="sid-C3803939-0872-457F-8336-EAE484DC4A04" />
+  </collaboration>
+  <process id="sid-C3803939-0872-457F-8336-EAE484DC4A04" name="Customer" processType="None" isClosed="false" isExecutable="false">
+    <extensionElements />
+    <startEvent id="StartEvent_0onhtuk" name="Start event, its name does not matter">
+      <outgoing>SequenceFlow_0ybfblu</outgoing>
+    </startEvent>
+    <task id="Task_1_tick" name="First tick task">
+      <incoming>SequenceFlow_0ybfblu</incoming>
+      <outgoing>SequenceFlow_1wmzok4</outgoing>
+      <outgoing>SequenceFlow_0hdyz53</outgoing>
+    </task>
+    <task id="Task_2_tick_first" name="Second tick task">
+      <incoming>SequenceFlow_1wmzok4</incoming>
+    </task>
+    <task id="Task_2_tick_second" name="Second tick task">
+      <incoming>SequenceFlow_0hdyz53</incoming>
+    </task>
+    <sequenceFlow id="SequenceFlow_0ybfblu" sourceRef="StartEvent_0onhtuk" targetRef="Task_1_tick" />
+    <sequenceFlow id="SequenceFlow_1wmzok4" sourceRef="Task_1_tick" targetRef="Task_2_tick_first" />
+    <sequenceFlow id="SequenceFlow_0hdyz53" sourceRef="Task_1_tick" targetRef="Task_2_tick_second" />
+  </process>
+  <bpmndi:BPMNDiagram id="sid-74620812-92c4-44e5-949c-aa47393d3830">
+    <bpmndi:BPMNPlane id="sid-cdcae759-2af7-4a6d-bd02-53f3352a731d" bpmnElement="sid-c0e745ff-361e-4afb-8c8d-2a1fc32b1424">
+      <bpmndi:BPMNShape id="sid-87F4C1D6-25E1-4A45-9DA7-AD945993D06F_gui" bpmnElement="sid-87F4C1D6-25E1-4A45-9DA7-AD945993D06F" isHorizontal="true">
+        <omgdc:Bounds x="83" y="105" width="505" height="236" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="StartEvent_0onhtuk_di" bpmnElement="StartEvent_0onhtuk">
+        <omgdc:Bounds x="146" y="207" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="128" y="250" width="73" height="53" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_1_tick_di" bpmnElement="Task_1_tick">
+        <omgdc:Bounds x="249" y="185" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_2_tick_first_di" bpmnElement="Task_2_tick_first">
+        <omgdc:Bounds x="468" y="118" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_2_tick_second_di" bpmnElement="Task_2_tick_second">
+        <omgdc:Bounds x="468" y="241" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0ybfblu_di" bpmnElement="SequenceFlow_0ybfblu">
+        <di:waypoint x="182" y="225" />
+        <di:waypoint x="249" y="225" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_1wmzok4_di" bpmnElement="SequenceFlow_1wmzok4">
+        <di:waypoint x="349" y="197" />
+        <di:waypoint x="409" y="197" />
+        <di:waypoint x="409" y="158" />
+        <di:waypoint x="468" y="158" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_0hdyz53_di" bpmnElement="SequenceFlow_0hdyz53">
+        <di:waypoint x="349" y="250" />
+        <di:waypoint x="409" y="250" />
+        <di:waypoint x="409" y="281" />
+        <di:waypoint x="468" y="281" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>
