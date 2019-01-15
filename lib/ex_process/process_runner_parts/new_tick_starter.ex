@@ -15,5 +15,4 @@ defmodule ExProcess.ProcessRunnerParts.NewTickStarter do
   def process_message(state, _msg) do
     state
   end
-
 end

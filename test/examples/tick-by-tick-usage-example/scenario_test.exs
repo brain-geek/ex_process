@@ -12,11 +12,18 @@ defmodule ExProcess.TickByTickUsageExampleTest do
 
     # Run the process, note the step_by_step mode requested
     {:ok, xml} = "#{__DIR__}/diagram.bpmn" |> File.read!() |> ExProcess.Bpmn.Parser.parse()
-    {:ok, _} = ExProcess.ProcessSupervisor.run(xml, %{process_name: "TickByTick", runner_options: %{step_by_step: true}})
+
+    {:ok, _} =
+      ExProcess.ProcessSupervisor.run(xml, %{
+        process_name: "TickByTick",
+        runner_options: %{step_by_step: true}
+      })
 
     # Initial state would be obviously start node, note that it
     # won't change/advance due to special mode enabled
-    assert(ExProcess.ProcessSupervisor.current_state("TickByTick") == {:ok, ["StartEvent_0onhtuk"]})
+    assert(
+      ExProcess.ProcessSupervisor.current_state("TickByTick") == {:ok, ["StartEvent_0onhtuk"]}
+    )
 
     # Request new tick processing
     ExProcess.ProcessSupervisor.force_tick("TickByTick")
@@ -27,7 +34,10 @@ defmodule ExProcess.TickByTickUsageExampleTest do
     # Request the third tick processing
     ExProcess.ProcessSupervisor.force_tick("TickByTick")
 
-    assert(ExProcess.ProcessSupervisor.current_state("TickByTick") == {:ok, ["Task_2_tick_first", "Task_2_tick_second"]})
+    assert(
+      ExProcess.ProcessSupervisor.current_state("TickByTick") ==
+        {:ok, ["Task_2_tick_first", "Task_2_tick_second"]}
+    )
 
     # Request the final tick processing
     ExProcess.ProcessSupervisor.force_tick("TickByTick")
