@@ -7,6 +7,10 @@ otp_release:
   - 19.2
   - 20.0
   - 21.0
+matrix:
+  exclude:
+    - elixir: 1.8.0
+      otp_release: 19.2
 
 sudo: false
 script:
