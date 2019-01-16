@@ -9,10 +9,9 @@ defmodule ExProcess.TestTools do
 
     # Clear matchers
     Agent.update(ExProcess.Matcher.Task, fn _ -> MapSet.new() end)
-
-    # Clear event matchers
     Agent.update(ExProcess.Matcher.EventPublish, fn _ -> MapSet.new() end)
     Agent.update(ExProcess.Matcher.EventReceive, fn _ -> MapSet.new() end)
+    Agent.update(ExProcess.Matcher.FlowCondition, fn _ -> MapSet.new() end)
 
     :ok
   end

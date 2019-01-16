@@ -84,12 +84,28 @@ defmodule ExProcess.Process do
 
   defmodule Flow do
     @moduledoc """
-    Struct to store process part: flow.
+    Struct to store process part: flow without condition.
 
     Flow is a link between two states.
     """
 
     @enforce_keys [:id, :from, :to]
     defstruct name: "", id: nil, from: [], to: []
+  end
+
+  defmodule ConditionalFlow do
+    @moduledoc """
+    Struct to store process part: flow with condition.
+
+    Flow is a link between two states.
+
+    Note: we don't use condition field separately from name at the moment
+    due to BPMN visual editor used at the moment can't edit it.
+
+    TODO: separate name and condition at the time of parsing.
+    """
+
+    @enforce_keys [:id, :from, :to, :condition]
+    defstruct name: "", id: nil, from: [], to: [], condition: nil
   end
 end

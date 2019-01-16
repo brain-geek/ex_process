@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" targetNamespace="" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL http://www.omg.org/spec/BPMN/2.0/20100501/BPMN20.xsd">
+  <collaboration id="sid-c0e745ff-361e-4afb-8c8d-2a1fc32b1424">
+    <participant id="sid-87F4C1D6-25E1-4A45-9DA7-AD945993D06F" processRef="sid-C3803939-0872-457F-8336-EAE484DC4A04" />
+  </collaboration>
+  <process id="sid-C3803939-0872-457F-8336-EAE484DC4A04" name="Customer" processType="None" isClosed="false" isExecutable="false">
+    <extensionElements />
+    <sequenceFlow id="SequenceFlow_1dn6n5e" sourceRef="StartEvent_01zfkpz" targetRef="Task_0kb72qb" />
+    <sequenceFlow id="SequenceFlow_0dajz1y" name="If everything is awesome" sourceRef="Task_0kb72qb" targetRef="Task_0nwel46">
+      <conditionExpression xsi:type="tFormalExpression"></conditionExpression>
+    </sequenceFlow>
+    <startEvent id="StartEvent_01zfkpz">
+      <outgoing>SequenceFlow_1dn6n5e</outgoing>
+    </startEvent>
+    <task id="Task_0kb72qb" name="Before flow">
+      <incoming>SequenceFlow_1dn6n5e</incoming>
+      <outgoing>SequenceFlow_0dajz1y</outgoing>
+    </task>
+    <task id="Task_0nwel46" name="After flow">
+      <incoming>SequenceFlow_0dajz1y</incoming>
+    </task>
+  </process>
+  <bpmndi:BPMNDiagram id="sid-74620812-92c4-44e5-949c-aa47393d3830">
+    <bpmndi:BPMNPlane id="sid-cdcae759-2af7-4a6d-bd02-53f3352a731d" bpmnElement="sid-c0e745ff-361e-4afb-8c8d-2a1fc32b1424">
+      <bpmndi:BPMNShape id="sid-87F4C1D6-25E1-4A45-9DA7-AD945993D06F_gui" bpmnElement="sid-87F4C1D6-25E1-4A45-9DA7-AD945993D06F" isHorizontal="true">
+        <omgdc:Bounds x="83" y="105" width="662" height="235" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="StartEvent_01zfkpz_di" bpmnElement="StartEvent_01zfkpz">
+        <omgdc:Bounds x="170" y="209" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_0kb72qb_di" bpmnElement="Task_0kb72qb">
+        <omgdc:Bounds x="316" y="187" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_1dn6n5e_di" bpmnElement="SequenceFlow_1dn6n5e">
+        <di:waypoint x="206" y="227" />
+        <di:waypoint x="316" y="227" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Task_0nwel46_di" bpmnElement="Task_0nwel46">
+        <omgdc:Bounds x="586" y="187" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0dajz1y_di" bpmnElement="SequenceFlow_0dajz1y">
+        <di:waypoint x="416" y="227" />
+        <di:waypoint x="586" y="227" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="466" y="194" width="71" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

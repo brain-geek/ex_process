@@ -41,7 +41,8 @@ defmodule ExProcess.Bpmn.Parser do
              ]),
            flows:
              List.flatten([
-               get_flows(xml, process_id)
+               get_flows(xml, process_id),
+               get_conditional_flows(xml, process_id)
              ])
          }}
     end
@@ -133,7 +134,7 @@ defmodule ExProcess.Bpmn.Parser do
 
   defp get_flows(xml, process_id) do
     try do
-      SweetXml.xpath(xml, ~x"//process[@id='#{process_id}']/sequenceFlow"l)
+      SweetXml.xpath(xml, ~x"//process[@id='#{process_id}']/sequenceFlow[not(.//conditionExpression)]"l)
     catch
       :exit, _ -> nil
     end
@@ -141,6 +142,23 @@ defmodule ExProcess.Bpmn.Parser do
       %ExProcess.Process.Flow{
         id: SweetXml.xpath(x, ~x"./@id"S),
         name: SweetXml.xpath(x, ~x"./@name"S),
+        from: SweetXml.xpath(x, ~x"./@sourceRef"S),
+        to: SweetXml.xpath(x, ~x"./@targetRef"S)
+      }
+    end)
+  end
+
+  defp get_conditional_flows(xml, process_id) do
+    try do
+      SweetXml.xpath(xml, ~x"//process[@id='#{process_id}']/sequenceFlow/conditionExpression/.."l)
+    catch
+      :exit, _ -> nil
+    end
+    |> Enum.map(fn x ->
+      %ExProcess.Process.ConditionalFlow{
+        id: SweetXml.xpath(x, ~x"./@id"S),
+        name: SweetXml.xpath(x, ~x"./@name"S),
+        condition: SweetXml.xpath(x, ~x"./@name"S), #TODO: use other source for condition data
         from: SweetXml.xpath(x, ~x"./@sourceRef"S),
         to: SweetXml.xpath(x, ~x"./@targetRef"S)
       }

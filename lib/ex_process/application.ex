@@ -10,9 +10,10 @@ defmodule ExProcess.Application do
     children = [
       {Registry, keys: :unique, name: ExProcess.ProcessRegistry},
       {Registry, keys: :duplicate, name: ExProcess.PubSubRegistry},
-      {ExProcess.Matcher.Task, name: ExProcess.Matcher.Task},
-      {ExProcess.Matcher.EventPublish, name: ExProcess.Matcher.EventPublish},
-      {ExProcess.Matcher.EventReceive, name: ExProcess.Matcher.EventReceive},
+      ExProcess.Matcher.Task,
+      ExProcess.Matcher.EventPublish,
+      ExProcess.Matcher.EventReceive,
+      ExProcess.Matcher.FlowCondition,
       {ExProcess.ProcessSupervisor, strategy: :one_for_one, name: ExProcess.ProcessSupervisor}
     ]
 

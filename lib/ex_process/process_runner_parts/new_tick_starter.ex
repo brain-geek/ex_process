@@ -10,7 +10,7 @@ defmodule ExProcess.ProcessRunnerParts.NewTickStarter do
 
   def process_tick(state) do
     active_next_tick = state[:active_next_tick] |> Enum.uniq()
-    Map.merge(state, %{active_nodes: active_next_tick, active_next_tick: []})
+    Map.merge(state, %{active_nodes: active_next_tick, active_next_tick: [], flows_to_process_this_tick: []})
   end
 
   def process_message(state, _msg) do

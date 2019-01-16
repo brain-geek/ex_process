@@ -151,5 +151,38 @@ defmodule ExProcess.Bpmn.ParserTest do
            }}
       )
     end
+
+    test "BPMN with conditional flow" do
+      xml = ExProcess.TestTools.fixture("conditional")
+
+      assert(
+        ExProcess.Bpmn.Parser.parse(xml) ==
+          {:ok,
+           %ExProcess.Process{
+             id: "sid-C3803939-0872-457F-8336-EAE484DC4A04",
+             activities: [
+               %ExProcess.Process.Task{id: "Task_0kb72qb", name: "Task A"},
+               %ExProcess.Process.Task{id: "Task_0nwel46", name: "Task B"}
+             ],
+             events: [%ExProcess.Process.StartEvent{id: "StartEvent_01zfkpz", name: ""}],
+             flows: [
+               %ExProcess.Process.Flow{
+                 from: "StartEvent_01zfkpz",
+                 id: "SequenceFlow_1dn6n5e",
+                 name: "",
+                 to: "Task_0kb72qb"
+               },
+               %ExProcess.Process.ConditionalFlow{
+                 from: "Task_0kb72qb",
+                 id: "SequenceFlow_0dajz1y",
+                 name: "If everything is awesome",
+                 to: "Task_0nwel46",
+                 condition: "If everything is awesome",
+               }
+             ],
+             name: ""
+           }}
+      )
+    end
   end
 end

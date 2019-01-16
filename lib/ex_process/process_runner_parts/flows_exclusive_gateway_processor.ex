@@ -18,7 +18,6 @@ defmodule ExProcess.ProcessRunnerParts.FlowsExclusiveGatewayProcessor do
       |> Enum.filter(fn exclusive_gateway ->
         incoming_flows =
           state[:process].flows
-          |> Enum.filter(&match?(%ExProcess.Process.Flow{}, &1))
           |> Enum.filter(&(&1.to == exclusive_gateway.id))
 
         MapSet.subset?(MapSet.new(incoming_flows), MapSet.new(state[:flows_to_process_this_tick]))

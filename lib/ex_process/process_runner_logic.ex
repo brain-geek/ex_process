@@ -21,8 +21,11 @@ defmodule ExProcess.ProcessRunnerLogic do
       ExProcess.ProcessRunnerParts.MessageCatcher,
       ExProcess.ProcessRunnerParts.MessageThrower,
 
-      # Executing core logic
+      # Executing Tasks
       ExProcess.ProcessRunnerParts.TaskRunner,
+
+      # Executing Flows logic
+      ExProcess.ProcessRunnerParts.FlowsWithConditionsToProcessMarker,
       ExProcess.ProcessRunnerParts.FlowsExclusiveGatewayProcessor,
       ExProcess.ProcessRunnerParts.FlowsProcessor,
 
@@ -33,7 +36,7 @@ defmodule ExProcess.ProcessRunnerLogic do
 
   def start(opts = %{process: _, process_name: _}) do
     parts_list = opts |> Map.get(:parts_list, default_parts_list())
-    start_state = opts |> Map.merge(%{active_next_tick: [], parts_list: parts_list})
+    start_state = opts |> Map.merge(%{active_next_tick: [], flows_to_process_this_tick: [], parts_list: parts_list})
 
     Enum.reduce(parts_list, start_state, fn part, st -> part.start(st) end)
   end
