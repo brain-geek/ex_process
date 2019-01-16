@@ -107,10 +107,6 @@ defmodule ExProcess.Bpmn.ParserTest do
                  id: "SequenceFlow_1sttm64",
                  name: "",
                  to: "Task_1jo73o5"
-               },
-               %ExProcess.Process.ExclusiveGateway{
-                 id: "ExclusiveGateway_0169psm",
-                 name: "Parallel Gateway - converging"
                }
              ],
              id: "Process_1",
@@ -120,7 +116,13 @@ defmodule ExProcess.Bpmn.ParserTest do
                %ExProcess.Process.StartEvent{id: "StartEvent_07knhrl", name: "Start 2"},
                %ExProcess.Process.EndEvent{id: "EndEvent_0p6f41t", name: "The end"}
              ],
-             activities: [%ExProcess.Process.Task{id: "Task_1jo73o5", name: "Task"}]
+             activities: [
+               %ExProcess.Process.Task{id: "Task_1jo73o5", name: "Task"},
+               %ExProcess.Process.ExclusiveGateway{
+                 id: "ExclusiveGateway_0169psm",
+                 name: "Parallel Gateway - converging"
+               }
+             ]
            }}
       )
     end

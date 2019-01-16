@@ -11,11 +11,22 @@ defmodule ExProcess.ProcessRunnerLogic do
   """
   def default_parts_list do
     [
+      # Startup only
       ExProcess.ProcessRunnerParts.StartViaStartNodes,
+
+      # Prepare state
+      ExProcess.ProcessRunnerParts.FlowsToProcessMarker,
+
+      # Messaging
       ExProcess.ProcessRunnerParts.MessageCatcher,
-      ExProcess.ProcessRunnerParts.TaskRunner,
       ExProcess.ProcessRunnerParts.MessageThrower,
-      ExProcess.ProcessRunnerParts.FlowsNextNodesActivator,
+
+      # Executing core logic
+      ExProcess.ProcessRunnerParts.TaskRunner,
+      ExProcess.ProcessRunnerParts.FlowsExclusiveGatewayProcessor,
+      ExProcess.ProcessRunnerParts.FlowsProcessor,
+
+      # Prepare/cleanup state before next tick
       ExProcess.ProcessRunnerParts.NewTickStarter
     ]
   end
@@ -28,8 +39,7 @@ defmodule ExProcess.ProcessRunnerLogic do
   end
 
   def process_tick(state) do
-    state[:parts_list]
-    |> Enum.reduce(state, fn part, st -> part.process_tick(st) end)
+    Enum.reduce(state[:parts_list], state, fn part, st -> part.process_tick(st) end)
   end
 
   def process_message(state, msg) do

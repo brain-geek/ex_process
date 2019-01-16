@@ -27,7 +27,11 @@ defmodule ExProcess.Bpmn.Parser do
          %ExProcess.Process{
            id: process_id,
            name: get_process_name(xml, process_id),
-           activities: get_tasks(xml, process_id),
+           activities:
+             List.flatten([
+               get_tasks(xml, process_id),
+               get_exclusive_gateways(xml, process_id)
+             ]),
            events:
              List.flatten([
                get_mail_throw_events(xml, process_id),
@@ -37,8 +41,7 @@ defmodule ExProcess.Bpmn.Parser do
              ]),
            flows:
              List.flatten([
-               get_flows(xml, process_id),
-               get_exclusive_gateways(xml, process_id)
+               get_flows(xml, process_id)
              ])
          }}
     end

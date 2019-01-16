@@ -1,7 +1,6 @@
-defmodule ExProcess.ProcessRunnerParts.FlowsNextNodesActivator do
+defmodule ExProcess.ProcessRunnerParts.FlowsToProcessMarker do
   @moduledoc """
-    This is part of Process Runner which marks nodes connected by flows
-    to be active in the next tick
+    This is part of Process Runner which marks flows to process this tick
   """
 
   def start(state = %{}) do
@@ -9,13 +8,12 @@ defmodule ExProcess.ProcessRunnerParts.FlowsNextNodesActivator do
   end
 
   def process_tick(state) do
-    active_next_tick_from_flows =
+    current_tick_active_flows =
       state[:process].flows
       |> Enum.filter(&match?(%ExProcess.Process.Flow{}, &1))
       |> Enum.filter(&Enum.member?(state.active_nodes, &1.from))
-      |> Enum.map(& &1.to)
 
-    update_in(state[:active_next_tick], &(&1 ++ active_next_tick_from_flows))
+    put_in(state[:flows_to_process_this_tick], current_tick_active_flows)
   end
 
   def process_message(state, _msg) do

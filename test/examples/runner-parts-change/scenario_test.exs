@@ -25,7 +25,7 @@ defmodule ExProcess.RunnerPartsChangeExampleTest do
           runner_options: %{step_by_step: true},
           parts_list:
             ExProcess.ProcessRunnerLogic.default_parts_list() --
-              [ExProcess.ProcessRunnerParts.FlowsNextNodesActivator]
+              [ExProcess.ProcessRunnerParts.FlowsProcessor]
         }
       )
 
