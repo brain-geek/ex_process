@@ -6,7 +6,9 @@ defmodule ExProcess.ConditionalFlowExampleTest do
 
     # Set up matchers for this process
     ExProcess.Matcher.Task.register_matcher("Before flow", fn _ -> nil end)
-    ExProcess.Matcher.Task.register_matcher("After flow",
+
+    ExProcess.Matcher.Task.register_matcher(
+      "After flow",
       fn _ ->
         ExProcess.PubSub.broadcast(:conditional_example, :it_worked)
       end
@@ -28,6 +30,11 @@ defmodule ExProcess.ConditionalFlowExampleTest do
 
     # It should proceed to running handler and therefor receive this message
     assert_receive %ExProcess.PubSub.Message{channel: :conditional_example, info: :it_worked}
+
+    # Last activated Task should still be active
+    assert(
+      ExProcess.ProcessSupervisor.current_state("ConditionalExample") == {:ok, ["Task_0nwel46"]}
+    )
   end
 
   test "when condition evaluated to false, flow doesn't execute" do
@@ -40,5 +47,10 @@ defmodule ExProcess.ConditionalFlowExampleTest do
 
     # It should fail the flow check and not receive this message
     refute_receive %ExProcess.PubSub.Message{channel: :conditional_example, info: :it_worked}
+
+    # Last activated Task should still be active
+    assert(
+      ExProcess.ProcessSupervisor.current_state("ConditionalExample") == {:ok, ["Task_0kb72qb"]}
+    )
   end
 end

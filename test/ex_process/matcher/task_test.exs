@@ -25,7 +25,10 @@ defmodule ExProcess.Matcher.TaskTest do
 
   describe "matching" do
     test "does not match when there's nothing to match" do
-      assert(ExProcess.Matcher.Task.match("Kill Cthulhu") == {:error, "No matches found"})
+      assert(
+        ExProcess.Matcher.Task.match("Kill Cthulhu") ==
+          {:error, {"No matches found", "Kill Cthulhu"}}
+      )
     end
 
     test "matches string matchers" do

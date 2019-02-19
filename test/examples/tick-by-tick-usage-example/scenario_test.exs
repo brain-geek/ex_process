@@ -1,5 +1,5 @@
 defmodule ExProcess.TickByTickUsageExampleTest do
-  use ExUnit.Case
+  use ExUnit.Case, async: true
 
   setup do
     ExProcess.TestTools.reset_state()
@@ -43,6 +43,6 @@ defmodule ExProcess.TickByTickUsageExampleTest do
     ExProcess.ProcessSupervisor.force_tick("TickByTick")
 
     # Due to not having any outgoing flows this process will now have zero active nodes
-    assert(ExProcess.ProcessSupervisor.current_state("TickByTick") == {:ok, []})
+    assert ExProcess.ProcessSupervisor.current_state("TickByTick") == {:ok, ["Task_2_tick_first", "Task_2_tick_second"]}
   end
 end

@@ -76,6 +76,7 @@ defmodule ExProcess.ExclusiveGatewayLogicExampleTest do
 
     # On the last tick we see that final task has been enabled
     ExProcess.ProcessSupervisor.force_tick(@process_name)
+
     assert(ExProcess.ProcessSupervisor.current_state(@process_name) == {:ok, ["Task_0i98aym"]})
   end
 
@@ -97,8 +98,8 @@ defmodule ExProcess.ExclusiveGatewayLogicExampleTest do
     ExProcess.ProcessSupervisor.force_tick(@process_name)
     assert(ExProcess.ProcessSupervisor.current_state(@process_name) == {:ok, ["Task_1v0sozz"]})
 
-    # Gateway not activated due to not having all the needed flows
+    # Gateway still active, but has no possible flows to be activated
     ExProcess.ProcessSupervisor.force_tick(@process_name)
-    assert(ExProcess.ProcessSupervisor.current_state(@process_name) == {:ok, []})
+    assert(ExProcess.ProcessSupervisor.current_state(@process_name) == {:ok, ["Task_1v0sozz"]})
   end
 end

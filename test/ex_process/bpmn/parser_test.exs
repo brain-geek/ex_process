@@ -177,7 +177,7 @@ defmodule ExProcess.Bpmn.ParserTest do
                  id: "SequenceFlow_0dajz1y",
                  name: "If everything is awesome",
                  to: "Task_0nwel46",
-                 condition: "If everything is awesome",
+                 condition: "If everything is awesome"
                }
              ],
              name: ""

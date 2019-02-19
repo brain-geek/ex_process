@@ -25,14 +25,18 @@ defmodule ExProcess.Matcher.FlowConditionTest do
 
   describe "matching" do
     test "does not match when there's nothing to match" do
-      assert(ExProcess.Matcher.FlowCondition.match("Kill Cthulhu") == {:error, "No matches found"})
+      assert(
+        ExProcess.Matcher.FlowCondition.match("Kill Cthulhu") ==
+          {:error, {"No matches found", "Kill Cthulhu"}}
+      )
     end
 
     test "matches string matchers" do
       ExProcess.Matcher.FlowCondition.register_matcher("Do stuff", ExProcess.TestMatcher)
 
       assert(
-        ExProcess.Matcher.FlowCondition.match("Do stuff") == {:ok, [{"Do stuff", ExProcess.TestMatcher}]}
+        ExProcess.Matcher.FlowCondition.match("Do stuff") ==
+          {:ok, [{"Do stuff", ExProcess.TestMatcher}]}
       )
     end
 
@@ -56,7 +60,9 @@ defmodule ExProcess.Matcher.FlowConditionTest do
         &TestHandler.run/1
       )
 
-      assert(ExProcess.Matcher.FlowCondition.run_match("Light switch 555 enabled") == "Handled 555")
+      assert(
+        ExProcess.Matcher.FlowCondition.run_match("Light switch 555 enabled") == "Handled 555"
+      )
     end
   end
 end

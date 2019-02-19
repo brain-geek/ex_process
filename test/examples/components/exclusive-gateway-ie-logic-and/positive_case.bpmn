@@ -24,7 +24,7 @@
       <incoming>SequenceFlow_1qavxil</incoming>
       <outgoing>SequenceFlow_0g3w15k</outgoing>
     </exclusiveGateway>
-    <task id="Task_0i98aym" name="This should be fired">
+    <task id="Task_0i98aym" name="Task that should be fired">
       <incoming>SequenceFlow_0g3w15k</incoming>
     </task>
     <sequenceFlow id="SequenceFlow_0g3w15k" sourceRef="ExclusiveGateway_034og2t" targetRef="Task_0i98aym" />

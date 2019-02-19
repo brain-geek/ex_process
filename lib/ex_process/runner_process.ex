@@ -29,7 +29,7 @@ defmodule ExProcess.RunnerProcess do
     process_runner_output[:message_catcher][:subscriptions]
     |> Enum.each(&ExProcess.PubSub.subscribe(self(), elem(&1, 1)))
 
-    schedule_next_tick(opts)
+    schedule_next_tick(opts, true)
 
     {:ok, process_runner_output}
   end
@@ -38,7 +38,7 @@ defmodule ExProcess.RunnerProcess do
     {:reply, {:ok, state[:active_nodes]}, state}
   end
 
-  def handle_cast(:process_next_tick, state) do
+  def handle_info(:process_next_tick, state) do
     new_state = ProcessRunnerLogic.process_tick(state)
     schedule_next_tick(state)
 
@@ -49,14 +49,19 @@ defmodule ExProcess.RunnerProcess do
     new_state = ProcessRunnerLogic.process_message(state, msg)
 
     # Schedule next tick to respond to external events
-    schedule_next_tick(state)
+    schedule_next_tick(state, true)
 
     {:noreply, new_state}
   end
 
-  defp schedule_next_tick(state) do
+  defp schedule_next_tick(state, immediate \\ false) do
     unless get_in(state, [:runner_options, :step_by_step]) do
-      GenServer.cast(self(), :process_next_tick)
+      if immediate do
+        send(self(), :process_next_tick)
+      else
+        # TODO: make this constant configurable
+        Process.send_after(self(), :process_next_tick, 10)
+      end
     end
   end
 end

@@ -24,18 +24,16 @@ defmodule ExProcess.ProcessRunnerTest do
   end
 
   describe "step-by-step mode" do
-    process = ExProcess.TestTools.parsed_fixture("only_start")
+    test "works correctly" do
+      process = ExProcess.TestTools.parsed_fixture("only_start")
 
-    {:ok, _} =
-      ExProcess.ProcessSupervisor.run(process, %{
-        process_name: "T",
-        runner_options: %{step_by_step: true}
-      })
+      {:ok, _} =
+        ExProcess.ProcessSupervisor.run(process, %{
+          process_name: "T",
+          runner_options: %{step_by_step: true}
+        })
 
-    assert(ExProcess.ProcessSupervisor.current_state("T") == {:ok, ["StartEvent_1kh4mpv"]})
-
-    ExProcess.ProcessSupervisor.force_tick("T")
-
-    assert(ExProcess.ProcessSupervisor.current_state("T") == {:ok, []})
+      assert(ExProcess.ProcessSupervisor.current_state("T") == {:ok, ["StartEvent_1kh4mpv"]})
+    end
   end
 end

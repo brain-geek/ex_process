@@ -9,43 +9,53 @@ defmodule ExProcess.ProcessRunnerLogic do
     ExProcess, so the recommended way is basing off this function
     result when doing customizations.
   """
-  def default_parts_list do
+  def default_steps_list do
     [
       # Startup only
-      ExProcess.ProcessRunnerParts.StartViaStartNodes,
+      ExProcess.ProcessRunnerSteps.StartViaStartNodes,
 
-      # Prepare state
-      ExProcess.ProcessRunnerParts.FlowsToProcessMarker,
+      # Mark flows for execution
+      ExProcess.ProcessRunnerSteps.FlowsToProcessMarker,
 
       # Messaging
-      ExProcess.ProcessRunnerParts.MessageCatcher,
-      ExProcess.ProcessRunnerParts.MessageThrower,
-
-      # Executing Tasks
-      ExProcess.ProcessRunnerParts.TaskRunner,
+      ExProcess.ProcessRunnerSteps.MessageCatcher,
+      ExProcess.ProcessRunnerSteps.MessageThrower,
 
       # Executing Flows logic
-      ExProcess.ProcessRunnerParts.FlowsWithConditionsToProcessMarker,
-      ExProcess.ProcessRunnerParts.FlowsExclusiveGatewayProcessor,
-      ExProcess.ProcessRunnerParts.FlowsProcessor,
+      ExProcess.ProcessRunnerSteps.FlowsWithConditionsToProcessMarker,
+      ExProcess.ProcessRunnerSteps.FlowsExclusiveGatewayProcessor,
+      ExProcess.ProcessRunnerSteps.FlowsProcessor,
+
+      # Activating activities (they were marked mostly in FlowsProcessor)
+      ExProcess.ProcessRunnerSteps.TaskActivator,
+
+      # Disabling end event scheduled for start
+      ExProcess.ProcessRunnerSteps.EndEventFinisher,
 
       # Prepare/cleanup state before next tick
-      ExProcess.ProcessRunnerParts.NewTickStarter
+      ExProcess.ProcessRunnerSteps.NewTickStarter
     ]
   end
 
   def start(opts = %{process: _, process_name: _}) do
-    parts_list = opts |> Map.get(:parts_list, default_parts_list())
-    start_state = opts |> Map.merge(%{active_next_tick: [], flows_to_process_this_tick: [], parts_list: parts_list})
+    steps_list = opts |> Map.get(:steps_list, default_steps_list())
 
-    Enum.reduce(parts_list, start_state, fn part, st -> part.start(st) end)
+    start_state =
+      opts
+      |> Map.merge(%{
+        scheduled_activation: [],
+        flows_to_process_this_tick: [],
+        steps_list: steps_list
+      })
+
+    Enum.reduce(steps_list, start_state, fn part, st -> part.start(st) end)
   end
 
   def process_tick(state) do
-    Enum.reduce(state[:parts_list], state, fn part, st -> part.process_tick(st) end)
+    Enum.reduce(state[:steps_list], state, fn part, st -> part.process_tick(st) end)
   end
 
   def process_message(state, msg) do
-    Enum.reduce(state[:parts_list], state, fn part, st -> part.process_message(st, msg) end)
+    Enum.reduce(state[:steps_list], state, fn part, st -> part.process_message(st, msg) end)
   end
 end

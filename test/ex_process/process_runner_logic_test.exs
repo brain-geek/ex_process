@@ -29,7 +29,7 @@ defmodule ExProcess.ProcessRunnerLogicTest do
     setup do
       %{
         typical_state: %{
-          active_next_tick: [],
+          scheduled_activation: [],
           active_nodes: [],
           process: %ExProcess.Process{
             activities: [%ExProcess.Process.Task{id: "Task_1cbh4mg", name: "Test handler"}],
@@ -61,7 +61,7 @@ defmodule ExProcess.ProcessRunnerLogicTest do
               {"IntermediateThrowEvent_1pfwajzz", :finish, &(&1 == "should make it")}
             ]
           },
-          parts_list: ExProcess.ProcessRunnerLogic.default_parts_list()
+          steps_list: ExProcess.ProcessRunnerLogic.default_steps_list()
         }
       }
     end
@@ -69,7 +69,7 @@ defmodule ExProcess.ProcessRunnerLogicTest do
     test "schedules correctly when one proper listener found", %{typical_state: typical_state} do
       msg = %ExProcess.PubSub.Message{channel: :start, info: :start_contents}
       new_state = ExProcess.ProcessRunnerLogic.process_message(typical_state, msg)
-      assert(new_state[:active_next_tick] == ["IntermediateThrowEvent_1pfwjvv"])
+      assert(new_state[:scheduled_activation] == ["IntermediateThrowEvent_1pfwjvv"])
     end
 
     test "schedules correctly with conditions", %{typical_state: typical_state} do
@@ -77,10 +77,10 @@ defmodule ExProcess.ProcessRunnerLogicTest do
       msg_passing = %ExProcess.PubSub.Message{channel: :finish, info: "should make it"}
 
       new_state = ExProcess.ProcessRunnerLogic.process_message(typical_state, msg_passing)
-      assert(new_state[:active_next_tick] == ["IntermediateThrowEvent_1pfwajzz"])
+      assert(new_state[:scheduled_activation] == ["IntermediateThrowEvent_1pfwajzz"])
 
       new_state = ExProcess.ProcessRunnerLogic.process_message(typical_state, msg_not_passing)
-      assert(new_state[:active_next_tick] == [])
+      assert(new_state[:scheduled_activation] == [])
     end
   end
 end

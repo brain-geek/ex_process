@@ -1,4 +1,4 @@
-defmodule ExProcess.ProcessRunnerParts.MessageCatcher do
+defmodule ExProcess.ProcessRunnerSteps.MessageCatcher do
   @moduledoc """
     This is part of Process Runner which handles MessageCatchEvent
     nodes, i.e. catches messages sent to ExProcess internal PubSub
@@ -39,6 +39,6 @@ defmodule ExProcess.ProcessRunnerParts.MessageCatcher do
     new_event_nodes = corresp_events |> Enum.map(&elem(&1, 0))
 
     # We push them to the next active tick
-    update_in(state[:active_next_tick], &(&1 ++ new_event_nodes))
+    update_in(state[:scheduled_activation], &(&1 ++ new_event_nodes))
   end
 end

@@ -46,10 +46,7 @@ defmodule ExProcess.ProcessSupervisor do
 
   @doc "Forces to process to start new tick. Used in combination with `step_by_step: true` runner option"
   def force_tick(process_name) do
-    GenServer.cast(
-      {:via, Registry, {@process_registry, {:process_name, process_name}}},
-      :process_next_tick
-    )
+    send(process_pid(process_name), :process_next_tick)
   end
 
   @doc "Returns process name by given PID."
@@ -60,7 +57,7 @@ defmodule ExProcess.ProcessSupervisor do
 
   @doc "Returns process PID by given process name."
   def process_pid(process_name) do
-    [{pid, pid}] = Registry.lookup(@process_registry, {:process_name, process_name})
+    [{pid, pid}] = Registry.lookup(ExProcess.ProcessRegistry, {:process_name, process_name})
     pid
   end
 end

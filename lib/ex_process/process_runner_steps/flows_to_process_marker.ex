@@ -1,4 +1,4 @@
-defmodule ExProcess.ProcessRunnerParts.FlowsToProcessMarker do
+defmodule ExProcess.ProcessRunnerSteps.FlowsToProcessMarker do
   @moduledoc """
     This is part of Process Runner which marks unconditional flows to process this tick
   """

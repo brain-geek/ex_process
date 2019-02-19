@@ -134,7 +134,10 @@ defmodule ExProcess.Bpmn.Parser do
 
   defp get_flows(xml, process_id) do
     try do
-      SweetXml.xpath(xml, ~x"//process[@id='#{process_id}']/sequenceFlow[not(.//conditionExpression)]"l)
+      SweetXml.xpath(
+        xml,
+        ~x"//process[@id='#{process_id}']/sequenceFlow[not(.//conditionExpression)]"l
+      )
     catch
       :exit, _ -> nil
     end
@@ -158,7 +161,8 @@ defmodule ExProcess.Bpmn.Parser do
       %ExProcess.Process.ConditionalFlow{
         id: SweetXml.xpath(x, ~x"./@id"S),
         name: SweetXml.xpath(x, ~x"./@name"S),
-        condition: SweetXml.xpath(x, ~x"./@name"S), #TODO: use other source for condition data
+        # TODO: use other source for condition data
+        condition: SweetXml.xpath(x, ~x"./@name"S),
         from: SweetXml.xpath(x, ~x"./@sourceRef"S),
         to: SweetXml.xpath(x, ~x"./@targetRef"S)
       }

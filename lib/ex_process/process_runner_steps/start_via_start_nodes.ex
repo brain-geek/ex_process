@@ -1,4 +1,4 @@
-defmodule ExProcess.ProcessRunnerParts.StartViaStartNodes do
+defmodule ExProcess.ProcessRunnerSteps.StartViaStartNodes do
   @moduledoc """
     This is part of Process Runner which initializes start nodes for the first tick
   """

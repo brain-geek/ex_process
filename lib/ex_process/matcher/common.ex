@@ -33,7 +33,7 @@ defmodule ExProcess.Matcher.Common do
           |> Enum.reject(&is_nil/1)
 
         if Enum.empty?(matches) do
-          {:error, "No matches found"}
+          {:error, {"No matches found", message}}
         else
           {:ok, matches}
         end
