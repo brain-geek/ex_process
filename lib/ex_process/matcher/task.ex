@@ -1,8 +1,9 @@
 defmodule ExProcess.Matcher.Task do
+  use ExProcess.Matcher.Common
+
   @moduledoc """
     Separate module which handles matching step text to code run.
   """
-  use ExProcess.Matcher.Common
 
   @doc "Adds matcher to list"
   def register_matcher(expression, handler) do

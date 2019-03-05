@@ -1,8 +1,9 @@
 defmodule ExProcess.Matcher.FlowCondition do
+  use ExProcess.Matcher.Common
+
   @moduledoc """
     Separate module which handles matching flow condition text to code.
   """
-  use ExProcess.Matcher.Common
 
   @doc "Adds matcher to list"
   def register_matcher(expression, handler) do
