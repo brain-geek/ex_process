@@ -1,4 +1,5 @@
 defmodule ExProcess.ProcessRunnerSteps.MessageCatcher do
+  use ExProcess.ProcessRunnerStep
   @moduledoc """
     This is part of Process Runner which handles MessageCatchEvent
     nodes, i.e. catches messages sent to ExProcess internal PubSub
@@ -18,10 +19,6 @@ defmodule ExProcess.ProcessRunnerSteps.MessageCatcher do
       |> List.flatten()
 
     Map.put_new(opts, @state_path, %{subscriptions: subscriptions})
-  end
-
-  def process_tick(state) do
-    state
   end
 
   def process_message(state, %ExProcess.PubSub.Message{channel: channel, info: info}) do

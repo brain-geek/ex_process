@@ -1,12 +1,9 @@
 defmodule ExProcess.ProcessRunnerSteps.NewTickStarter do
+  use ExProcess.ProcessRunnerStep
   @moduledoc """
     This is part of Process Runner which sets all next tick
     acive nodes to be active in the new tick
   """
-
-  def start(state = %{}) do
-    state
-  end
 
   def process_tick(state) do
     active_next_tick =
@@ -17,9 +14,5 @@ defmodule ExProcess.ProcessRunnerSteps.NewTickStarter do
       scheduled_activation: [],
       flows_to_process_this_tick: []
     })
-  end
-
-  def process_message(state, _msg) do
-    state
   end
 end

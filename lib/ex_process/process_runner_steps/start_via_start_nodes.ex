@@ -1,4 +1,5 @@
 defmodule ExProcess.ProcessRunnerSteps.StartViaStartNodes do
+  use ExProcess.ProcessRunnerStep
   @moduledoc """
     This is part of Process Runner which initializes start nodes for the first tick
   """
@@ -10,13 +11,5 @@ defmodule ExProcess.ProcessRunnerSteps.StartViaStartNodes do
       |> Enum.map(fn x -> x.id end)
 
     Map.put_new(opts, :active_nodes, start_node_ids)
-  end
-
-  def process_tick(state) do
-    state
-  end
-
-  def process_message(state, _msg) do
-    state
   end
 end

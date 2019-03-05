@@ -1,12 +1,9 @@
 defmodule ExProcess.ProcessRunnerSteps.FlowsExclusiveGatewayProcessor do
+  use ExProcess.ProcessRunnerStep
   @moduledoc """
     This is part of Process Runner which makes sure that ExclusiveGateway will
     be enabled only in case of all the incoming flows being active
   """
-
-  def start(state = %{}) do
-    state
-  end
 
   def process_tick(state) do
     exclusive_gateways =
@@ -29,9 +26,5 @@ defmodule ExProcess.ProcessRunnerSteps.FlowsExclusiveGatewayProcessor do
     update_in(state[:flows_to_process_this_tick], fn flows_list ->
       Enum.filter(flows_list, &(!Enum.member?(disabled_exclusive_gateway_ids, &1.to)))
     end)
-  end
-
-  def process_message(state, _msg) do
-    state
   end
 end

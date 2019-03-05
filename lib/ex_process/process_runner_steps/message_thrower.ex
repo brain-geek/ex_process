@@ -1,12 +1,9 @@
 defmodule ExProcess.ProcessRunnerSteps.MessageThrower do
+  use ExProcess.ProcessRunnerStep
   @moduledoc """
     This is part of Process Runner which handles MessageThrowEvent
     nodes, i.e. throws messages to ExProcess internal PubSub
   """
-
-  def start(state = %{}) do
-    state
-  end
 
   def process_tick(state) do
     active_nodes_set = Enum.into(state.active_nodes, MapSet.new())
@@ -24,10 +21,6 @@ defmodule ExProcess.ProcessRunnerSteps.MessageThrower do
     |> Enum.each(&ExProcess.Matcher.EventPublish.publish(&1.name))
 
     update_in(state[:active_nodes], &(&1 -- current_step_tasks))
-  end
-
-  def process_message(state, _msg) do
-    state
   end
 
   defp throw_event_ids_set(process) do

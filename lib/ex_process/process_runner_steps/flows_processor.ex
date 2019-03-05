@@ -1,12 +1,10 @@
 defmodule ExProcess.ProcessRunnerSteps.FlowsProcessor do
+  use ExProcess.ProcessRunnerStep
+
   @moduledoc """
     This is part of Process Runner which processes flows for this turn
     Bases off the FlowsToProcessMarker result.
   """
-
-  def start(state = %{}) do
-    state
-  end
 
   def process_tick(state) do
     activation_from_flows = state[:flows_to_process_this_tick] |> Enum.map(& &1.to)
@@ -18,9 +16,5 @@ defmodule ExProcess.ProcessRunnerSteps.FlowsProcessor do
       state[:scheduled_activation],
       &Enum.uniq(&1 ++ activation_from_flows)
     )
-  end
-
-  def process_message(state, _msg) do
-    state
   end
 end
