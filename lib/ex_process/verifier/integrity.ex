@@ -23,10 +23,10 @@ defmodule ExProcess.Verifier.Integrity do
 
     diff = uniq_linked_ids -- uniq_elements
 
-    if diff do
-      {:error, "missing elements found", diff}
-    else
+    if length(diff) == 0 do
       :ok
+    else
+      {:error, "missing elements found", diff}
     end
   end
 end

@@ -5,13 +5,13 @@ defmodule ExProcess.VerifierTest do
     test "accepts definitely correct .bpmn files" do
       ["no_start", "small", "start-parallel-end", "only_start_looped", "start-parallel-end"]
       |> Enum.each(fn fixture_name ->
-        assert(
-          fixture_name
+        result = fixture_name
           |> ExProcess.TestTools.fixture()
           |> ExProcess.Bpmn.Parser.parse()
           |> elem(1)
           |> ExProcess.Verifier.check()
-        )
+
+        assert(result == :ok, "#{fixture_name} failed check")
       end)
     end
 
@@ -21,7 +21,7 @@ defmodule ExProcess.VerifierTest do
       |> Enum.each(fn file_path ->
         {:ok, xml} = file_path |> File.read!() |> ExProcess.Bpmn.Parser.parse()
 
-        assert(ExProcess.Verifier.check(xml))
+        assert(ExProcess.Verifier.check(xml) == :ok)
       end)
     end
 
