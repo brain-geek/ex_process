@@ -27,6 +27,15 @@ defmodule ExProcess.ProcessSupervisor do
     DynamicSupervisor.start_child(__MODULE__, child_spec)
   end
 
+  def terminate(process_name) do
+    case process_pid(process_name) do
+      {:ok, pid} ->
+        DynamicSupervisor.terminate_child(__MODULE__, pid)
+      {:error, msg} ->
+        {:error, msg}
+    end
+  end
+
   @doc "Lists running ExProcess processes"
   def list_running do
     processes = DynamicSupervisor.which_children(__MODULE__)
@@ -38,26 +47,41 @@ defmodule ExProcess.ProcessSupervisor do
 
   @doc "Returns set of active nodes for the given process."
   def current_state(process_name) do
-    GenServer.call(
-      {:via, Registry, {@process_registry, {:process_name, process_name}}},
-      :get_current_state
-    )
+    case process_pid(process_name) do
+      {:ok, pid} ->
+        GenServer.call(pid, :get_current_state)
+      {:error, msg} ->
+        {:error, msg}
+    end
   end
 
   @doc "Forces to process to start new tick. Used in combination with `step_by_step: true` runner option"
   def force_tick(process_name) do
-    send(process_pid(process_name), :process_next_tick)
+    case process_pid(process_name) do
+      {:ok, pid} ->
+        send(pid, :process_next_tick)
+      {:error, msg} ->
+        {:error, msg}
+    end
   end
 
   @doc "Returns process name by given PID."
   def process_name(process_pid) do
-    [{^process_pid, process_name}] = Registry.lookup(@process_registry, {:pid, process_pid})
-    process_name
+    case Registry.lookup(@process_registry, {:pid, process_pid}) do
+      [{^process_pid, process_name}] ->
+        {:ok, process_name}
+      [] ->
+        {:error, "Process not started"}
+    end
   end
 
   @doc "Returns process PID by given process name."
   def process_pid(process_name) do
-    [{pid, pid}] = Registry.lookup(ExProcess.ProcessRegistry, {:process_name, process_name})
-    pid
+    case Registry.lookup(ExProcess.ProcessRegistry, {:process_name, process_name}) do
+      [{pid, pid}] ->
+        {:ok, pid}
+      [] ->
+        {:error, "Process not started"}
+    end
   end
 end

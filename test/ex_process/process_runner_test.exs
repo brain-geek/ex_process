@@ -18,8 +18,8 @@ defmodule ExProcess.ProcessRunnerTest do
 
       assert(ExProcess.ProcessSupervisor.current_state("Africa") == {:ok, starts})
 
-      assert(ExProcess.ProcessSupervisor.process_pid("Africa") == pid)
-      assert(ExProcess.ProcessSupervisor.process_name(pid) == "Africa")
+      assert(ExProcess.ProcessSupervisor.process_pid("Africa") == {:ok, pid})
+      assert(ExProcess.ProcessSupervisor.process_name(pid) == {:ok, "Africa"})
     end
   end
 

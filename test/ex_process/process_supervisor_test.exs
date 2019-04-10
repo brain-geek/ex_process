@@ -31,6 +31,22 @@ defmodule ExProcess.ProcessSupervisorTest do
     )
   end
 
+  test "terminates processes by name" do
+    process = ExProcess.TestTools.parsed_fixture("only_start")
+
+    {:ok, _pid1} = ExProcess.ProcessSupervisor.run(process, %{process_name: "Test1"})
+    {:ok, pid2} = ExProcess.ProcessSupervisor.run(process, %{process_name: "Test2"})
+
+    assert(:ok = ExProcess.ProcessSupervisor.terminate("Test1"))
+    assert({:error, "Process not started"} = ExProcess.ProcessSupervisor.terminate("Test5"))
+
+    assert(
+      ExProcess.ProcessSupervisor.list_running() == [
+        {pid2, "Test2"}
+      ]
+    )
+  end
+
   test "does not run duplicate names" do
     process = ExProcess.TestTools.parsed_fixture("only_start")
 
@@ -50,8 +66,12 @@ defmodule ExProcess.ProcessSupervisorTest do
     {:ok, pid} = ExProcess.ProcessSupervisor.run(process, %{process_name: "Africa"})
 
     assert(ExProcess.ProcessSupervisor.current_state("Africa") == {:ok, ["StartEvent_1kh4mpv"]})
+    assert(ExProcess.ProcessSupervisor.current_state("Not Africa") == {:error, "Process not started"})
 
-    assert(ExProcess.ProcessSupervisor.process_pid("Africa") == pid)
-    assert(ExProcess.ProcessSupervisor.process_name(pid) == "Africa")
+    assert(ExProcess.ProcessSupervisor.process_pid("Africa") == {:ok, pid})
+    assert(ExProcess.ProcessSupervisor.process_pid("Not Africa") == {:error, "Process not started"})
+
+    assert(ExProcess.ProcessSupervisor.process_name(pid) == {:ok, "Africa"})
+    assert(ExProcess.ProcessSupervisor.process_name(self()) == {:error, "Process not started"})
   end
 end
