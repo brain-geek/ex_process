@@ -26,7 +26,7 @@ defmodule ExProcess.OneEventOneHandlerEndExampleTest do
     {:ok, _} = ExProcess.ProcessSupervisor.run(xml, %{process_name: "Flow"})
 
     # Started with no start nodes
-    assert(ExProcess.ProcessSupervisor.current_state("Flow") == {:ok, []})
+    assert(ExProcess.RunnerProcess.current_state("Flow") == {:ok, []})
 
     # Broadcast event to start the Flow
     ExProcess.PubSub.broadcast("Publish Test Event")
@@ -37,6 +37,6 @@ defmodule ExProcess.OneEventOneHandlerEndExampleTest do
     :timer.sleep 50
 
     # It has flows to end, so this ends ending with empty state
-    assert(ExProcess.ProcessSupervisor.current_state("Flow") == {:ok, []})
+    assert(ExProcess.RunnerProcess.current_state("Flow") == {:ok, []})
   end
 end

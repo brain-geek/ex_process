@@ -22,24 +22,24 @@ defmodule ExProcess.ExclusiveGatewayLogicExampleTest do
 
     # Initial state would be start node
     assert(
-      ExProcess.ProcessSupervisor.current_state(@process_name) == {:ok, ["StartEvent_168gadc"]}
+      ExProcess.RunnerProcess.current_state(@process_name) == {:ok, ["StartEvent_168gadc"]}
     )
 
     # Request new tick processing
-    ExProcess.ProcessSupervisor.force_tick(@process_name)
+    ExProcess.RunnerProcess.force_tick(@process_name)
 
     # On the second tick we have Exclusive Gateway activated
     assert(
-      ExProcess.ProcessSupervisor.current_state(@process_name) ==
+      ExProcess.RunnerProcess.current_state(@process_name) ==
         {:ok, ["ExclusiveGateway_161dqo9"]}
     )
 
     # Request new tick processing
-    ExProcess.ProcessSupervisor.force_tick(@process_name)
+    ExProcess.RunnerProcess.force_tick(@process_name)
 
     # On the next tick we're having both Tasks enabled
     assert(
-      ExProcess.ProcessSupervisor.current_state(@process_name) ==
+      ExProcess.RunnerProcess.current_state(@process_name) ==
         {:ok, ["Task_1wpg8n3", "Task_1v0sozz"]}
     )
   end
@@ -55,29 +55,29 @@ defmodule ExProcess.ExclusiveGatewayLogicExampleTest do
 
     # Initial state would be start node
     assert(
-      ExProcess.ProcessSupervisor.current_state(@process_name) == {:ok, ["StartEvent_168gadc"]}
+      ExProcess.RunnerProcess.current_state(@process_name) == {:ok, ["StartEvent_168gadc"]}
     )
 
     # On the second tick we have both tasks activated
-    ExProcess.ProcessSupervisor.force_tick(@process_name)
+    ExProcess.RunnerProcess.force_tick(@process_name)
 
     assert(
-      ExProcess.ProcessSupervisor.current_state(@process_name) ==
+      ExProcess.RunnerProcess.current_state(@process_name) ==
         {:ok, ["Task_1wpg8n3", "Task_1v0sozz"]}
     )
 
     # On the third tick we have Gateway activated because it has all the incoming flows active
-    ExProcess.ProcessSupervisor.force_tick(@process_name)
+    ExProcess.RunnerProcess.force_tick(@process_name)
 
     assert(
-      ExProcess.ProcessSupervisor.current_state(@process_name) ==
+      ExProcess.RunnerProcess.current_state(@process_name) ==
         {:ok, ["ExclusiveGateway_034og2t"]}
     )
 
     # On the last tick we see that final task has been enabled
-    ExProcess.ProcessSupervisor.force_tick(@process_name)
+    ExProcess.RunnerProcess.force_tick(@process_name)
 
-    assert(ExProcess.ProcessSupervisor.current_state(@process_name) == {:ok, ["Task_0i98aym"]})
+    assert(ExProcess.RunnerProcess.current_state(@process_name) == {:ok, ["Task_0i98aym"]})
   end
 
   test "does not activate outgoing flow when not all incoming flows are active" do
@@ -91,15 +91,15 @@ defmodule ExProcess.ExclusiveGatewayLogicExampleTest do
 
     # Initial state would be start node
     assert(
-      ExProcess.ProcessSupervisor.current_state(@process_name) == {:ok, ["StartEvent_168gadc"]}
+      ExProcess.RunnerProcess.current_state(@process_name) == {:ok, ["StartEvent_168gadc"]}
     )
 
     # On the second tick we have the task B activated
-    ExProcess.ProcessSupervisor.force_tick(@process_name)
-    assert(ExProcess.ProcessSupervisor.current_state(@process_name) == {:ok, ["Task_1v0sozz"]})
+    ExProcess.RunnerProcess.force_tick(@process_name)
+    assert(ExProcess.RunnerProcess.current_state(@process_name) == {:ok, ["Task_1v0sozz"]})
 
     # Gateway still active, but has no possible flows to be activated
-    ExProcess.ProcessSupervisor.force_tick(@process_name)
-    assert(ExProcess.ProcessSupervisor.current_state(@process_name) == {:ok, ["Task_1v0sozz"]})
+    ExProcess.RunnerProcess.force_tick(@process_name)
+    assert(ExProcess.RunnerProcess.current_state(@process_name) == {:ok, ["Task_1v0sozz"]})
   end
 end

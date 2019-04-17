@@ -33,7 +33,7 @@ defmodule ExProcess.ConditionalFlowExampleTest do
 
     # Last activated Task should still be active
     assert(
-      ExProcess.ProcessSupervisor.current_state("ConditionalExample") == {:ok, ["Task_0nwel46"]}
+      ExProcess.RunnerProcess.current_state("ConditionalExample") == {:ok, ["Task_0nwel46"]}
     )
   end
 
@@ -50,7 +50,7 @@ defmodule ExProcess.ConditionalFlowExampleTest do
 
     # Last activated Task should still be active
     assert(
-      ExProcess.ProcessSupervisor.current_state("ConditionalExample") == {:ok, ["Task_0kb72qb"]}
+      ExProcess.RunnerProcess.current_state("ConditionalExample") == {:ok, ["Task_0kb72qb"]}
     )
   end
 end

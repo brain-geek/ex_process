@@ -32,16 +32,16 @@ defmodule ExProcess.RunnerPartsChangeExampleTest do
     # Initial state would be obviously start node, note that it
     # won't change/advance due to special mode enabled
     assert(
-      ExProcess.ProcessSupervisor.current_state("RunnerPartsChange") ==
+      ExProcess.RunnerProcess.current_state("RunnerPartsChange") ==
         {:ok, ["StartEvent_0onhtuk"]}
     )
 
     # Request new tick processing
-    ExProcess.ProcessSupervisor.force_tick("RunnerPartsChange")
+    ExProcess.RunnerProcess.force_tick("RunnerPartsChange")
 
     # As process here has FlowsProcessor disabled, no states are being changed.
     assert(
-      ExProcess.ProcessSupervisor.current_state("RunnerPartsChange") ==
+      ExProcess.RunnerProcess.current_state("RunnerPartsChange") ==
         {:ok, ["StartEvent_0onhtuk"]}
     )
   end

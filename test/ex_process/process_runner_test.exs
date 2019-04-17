@@ -16,10 +16,10 @@ defmodule ExProcess.ProcessRunnerTest do
         |> Enum.filter(&match?(%ExProcess.Process.StartEvent{}, &1))
         |> Enum.map(fn x -> x.id end)
 
-      assert(ExProcess.ProcessSupervisor.current_state("Africa") == {:ok, starts})
+      assert(ExProcess.RunnerProcess.current_state("Africa") == {:ok, starts})
 
-      assert(ExProcess.ProcessSupervisor.process_pid("Africa") == {:ok, pid})
-      assert(ExProcess.ProcessSupervisor.process_name(pid) == {:ok, "Africa"})
+      assert(ExProcess.RunnerProcess.process_pid("Africa") == {:ok, pid})
+      assert(ExProcess.RunnerProcess.process_name(pid) == {:ok, "Africa"})
     end
   end
 
@@ -33,7 +33,7 @@ defmodule ExProcess.ProcessRunnerTest do
           runner_options: %{step_by_step: true}
         })
 
-      assert(ExProcess.ProcessSupervisor.current_state("T") == {:ok, ["StartEvent_1kh4mpv"]})
+      assert(ExProcess.RunnerProcess.current_state("T") == {:ok, ["StartEvent_1kh4mpv"]})
     end
   end
 end

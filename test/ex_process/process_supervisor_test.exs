@@ -11,7 +11,7 @@ defmodule ExProcess.ProcessSupervisorTest do
     {:ok, pid} = ExProcess.ProcessSupervisor.run(process)
 
     assert(
-      ExProcess.ProcessSupervisor.list_running() == [
+      ExProcess.RunnerProcess.list_running() == [
         {pid, "Process_02qxbgAq"}
       ]
     )
@@ -24,7 +24,7 @@ defmodule ExProcess.ProcessSupervisorTest do
     {:ok, pid2} = ExProcess.ProcessSupervisor.run(process, %{process_name: "Test2"})
 
     assert(
-      ExProcess.ProcessSupervisor.list_running() == [
+      ExProcess.RunnerProcess.list_running() == [
         {pid1, "Test1"},
         {pid2, "Test2"}
       ]
@@ -41,7 +41,7 @@ defmodule ExProcess.ProcessSupervisorTest do
     assert({:error, "Process not started"} = ExProcess.ProcessSupervisor.terminate("Test5"))
 
     assert(
-      ExProcess.ProcessSupervisor.list_running() == [
+      ExProcess.RunnerProcess.list_running() == [
         {pid2, "Test2"}
       ]
     )
@@ -54,7 +54,7 @@ defmodule ExProcess.ProcessSupervisorTest do
     {:error, _} = ExProcess.ProcessSupervisor.run(process, %{process_name: "Test"})
 
     assert(
-      ExProcess.ProcessSupervisor.list_running() == [
+      ExProcess.RunnerProcess.list_running() == [
         {pid1, "Test"}
       ]
     )
@@ -65,13 +65,13 @@ defmodule ExProcess.ProcessSupervisorTest do
 
     {:ok, pid} = ExProcess.ProcessSupervisor.run(process, %{process_name: "Africa"})
 
-    assert(ExProcess.ProcessSupervisor.current_state("Africa") == {:ok, ["StartEvent_1kh4mpv"]})
-    assert(ExProcess.ProcessSupervisor.current_state("Not Africa") == {:error, "Process not started"})
+    assert(ExProcess.RunnerProcess.current_state("Africa") == {:ok, ["StartEvent_1kh4mpv"]})
+    assert(ExProcess.RunnerProcess.current_state("Not Africa") == {:error, "Process not started"})
 
-    assert(ExProcess.ProcessSupervisor.process_pid("Africa") == {:ok, pid})
-    assert(ExProcess.ProcessSupervisor.process_pid("Not Africa") == {:error, "Process not started"})
+    assert(ExProcess.RunnerProcess.process_pid("Africa") == {:ok, pid})
+    assert(ExProcess.RunnerProcess.process_pid("Not Africa") == {:error, "Process not started"})
 
-    assert(ExProcess.ProcessSupervisor.process_name(pid) == {:ok, "Africa"})
-    assert(ExProcess.ProcessSupervisor.process_name(self()) == {:error, "Process not started"})
+    assert(ExProcess.RunnerProcess.process_name(pid) == {:ok, "Africa"})
+    assert(ExProcess.RunnerProcess.process_name(self()) == {:error, "Process not started"})
   end
 end

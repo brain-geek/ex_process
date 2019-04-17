@@ -22,27 +22,27 @@ defmodule ExProcess.TickByTickUsageExampleTest do
     # Initial state would be obviously start node, note that it
     # won't change/advance due to special mode enabled
     assert(
-      ExProcess.ProcessSupervisor.current_state("TickByTick") == {:ok, ["StartEvent_0onhtuk"]}
+      ExProcess.RunnerProcess.current_state("TickByTick") == {:ok, ["StartEvent_0onhtuk"]}
     )
 
     # Request new tick processing
-    ExProcess.ProcessSupervisor.force_tick("TickByTick")
+    ExProcess.RunnerProcess.force_tick("TickByTick")
 
     # Note that after requesting to process one more tick we now have next process state
-    assert(ExProcess.ProcessSupervisor.current_state("TickByTick") == {:ok, ["Task_1_tick"]})
+    assert(ExProcess.RunnerProcess.current_state("TickByTick") == {:ok, ["Task_1_tick"]})
 
     # Request the third tick processing
-    ExProcess.ProcessSupervisor.force_tick("TickByTick")
+    ExProcess.RunnerProcess.force_tick("TickByTick")
 
     assert(
-      ExProcess.ProcessSupervisor.current_state("TickByTick") ==
+      ExProcess.RunnerProcess.current_state("TickByTick") ==
         {:ok, ["Task_2_tick_first", "Task_2_tick_second"]}
     )
 
     # Request the final tick processing
-    ExProcess.ProcessSupervisor.force_tick("TickByTick")
+    ExProcess.RunnerProcess.force_tick("TickByTick")
 
     # Due to not having any outgoing flows this process will now have zero active nodes
-    assert ExProcess.ProcessSupervisor.current_state("TickByTick") == {:ok, ["Task_2_tick_first", "Task_2_tick_second"]}
+    assert ExProcess.RunnerProcess.current_state("TickByTick") == {:ok, ["Task_2_tick_first", "Task_2_tick_second"]}
   end
 end

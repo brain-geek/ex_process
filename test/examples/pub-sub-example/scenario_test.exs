@@ -27,6 +27,6 @@ defmodule ExProcess.PubSubExampleTest do
     assert_receive %ExProcess.PubSub.Message{channel: :from_process, info: %{it: :works}}
 
     # Task has no outgoing flows flows, so this ends with it being active
-    assert(ExProcess.ProcessSupervisor.current_state("Flow") == {:ok, []})
+    assert(ExProcess.RunnerProcess.current_state("Flow") == {:ok, []})
   end
 end

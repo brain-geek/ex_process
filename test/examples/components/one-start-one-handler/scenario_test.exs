@@ -25,6 +25,6 @@ defmodule ExProcess.OneStartOneHandlerExampleTest do
     # assert_receive %ExProcess.PubSub.Message{channel: {:test, :test}, info: %{it: :works}}
 
     # # Task has no outgoing flows flows, but it has been activated, so it should be here
-    # assert(ExProcess.ProcessSupervisor.current_state("Flow") == {:ok, ["Task_0dzv2cn"]})
+    # assert(ExProcess.RunnerProcess.current_state("Flow") == {:ok, ["Task_0dzv2cn"]})
   end
 end
