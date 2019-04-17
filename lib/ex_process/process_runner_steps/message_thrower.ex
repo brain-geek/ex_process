@@ -1,5 +1,6 @@
 defmodule ExProcess.ProcessRunnerSteps.MessageThrower do
   use ExProcess.ProcessRunnerStep
+
   @moduledoc """
     This is part of Process Runner which handles MessageThrowEvent
     nodes, i.e. throws messages to ExProcess internal PubSub

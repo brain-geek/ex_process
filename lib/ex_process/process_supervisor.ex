@@ -31,6 +31,7 @@ defmodule ExProcess.ProcessSupervisor do
     case @runner_process.process_pid(process_name) do
       {:ok, pid} ->
         DynamicSupervisor.terminate_child(__MODULE__, pid)
+
       {:error, msg} ->
         {:error, msg}
     end

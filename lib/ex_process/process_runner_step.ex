@@ -22,8 +22,7 @@ defmodule ExProcess.ProcessRunnerStep do
         state
       end
 
-      defoverridable [start: 1, process_tick: 1, process_message: 2]
+      defoverridable start: 1, process_tick: 1, process_message: 2
     end
   end
-
 end

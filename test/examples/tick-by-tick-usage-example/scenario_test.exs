@@ -21,9 +21,7 @@ defmodule ExProcess.TickByTickUsageExampleTest do
 
     # Initial state would be obviously start node, note that it
     # won't change/advance due to special mode enabled
-    assert(
-      ExProcess.RunnerProcess.current_state("TickByTick") == {:ok, ["StartEvent_0onhtuk"]}
-    )
+    assert(ExProcess.RunnerProcess.current_state("TickByTick") == {:ok, ["StartEvent_0onhtuk"]})
 
     # Request new tick processing
     ExProcess.RunnerProcess.force_tick("TickByTick")
@@ -43,6 +41,7 @@ defmodule ExProcess.TickByTickUsageExampleTest do
     ExProcess.RunnerProcess.force_tick("TickByTick")
 
     # Due to not having any outgoing flows this process will now have zero active nodes
-    assert ExProcess.RunnerProcess.current_state("TickByTick") == {:ok, ["Task_2_tick_first", "Task_2_tick_second"]}
+    assert ExProcess.RunnerProcess.current_state("TickByTick") ==
+             {:ok, ["Task_2_tick_first", "Task_2_tick_second"]}
   end
 end

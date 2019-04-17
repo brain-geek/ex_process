@@ -1,5 +1,6 @@
 defmodule ExProcess.ProcessRunnerSteps.MessageCatcher do
   use ExProcess.ProcessRunnerStep
+
   @moduledoc """
     This is part of Process Runner which handles MessageCatchEvent
     nodes, i.e. catches messages sent to ExProcess internal PubSub

@@ -3,7 +3,7 @@ defmodule ExProcess.Matcher.FlowConditionTest do
 
   defmodule TestHandler do
     def run(%{"name" => name}) do
-      "Handled #{name}"
+      name == "OK"
     end
   end
 
@@ -60,9 +60,9 @@ defmodule ExProcess.Matcher.FlowConditionTest do
         &TestHandler.run/1
       )
 
-      assert(
-        ExProcess.Matcher.FlowCondition.run_match("Light switch 555 enabled") == "Handled 555"
-      )
+      assert(ExProcess.Matcher.FlowCondition.run_match("Light switch OK enabled") == true)
+
+      assert(ExProcess.Matcher.FlowCondition.run_match("Light switch NOTOK enabled") == false)
     end
   end
 end

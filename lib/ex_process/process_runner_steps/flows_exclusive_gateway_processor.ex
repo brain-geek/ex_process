@@ -1,5 +1,6 @@
 defmodule ExProcess.ProcessRunnerSteps.FlowsExclusiveGatewayProcessor do
   use ExProcess.ProcessRunnerStep
+
   @moduledoc """
     This is part of Process Runner which makes sure that ExclusiveGateway will
     be enabled only in case of all the incoming flows being active

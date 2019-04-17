@@ -73,6 +73,7 @@ defmodule ExProcess.RunnerProcess do
     case process_pid(process_name) do
       {:ok, pid} ->
         GenServer.call(pid, :get_current_state)
+
       {:error, msg} ->
         {:error, msg}
     end
@@ -83,6 +84,7 @@ defmodule ExProcess.RunnerProcess do
     case process_pid(process_name) do
       {:ok, pid} ->
         send(pid, :process_next_tick)
+
       {:error, msg} ->
         {:error, msg}
     end
@@ -93,6 +95,7 @@ defmodule ExProcess.RunnerProcess do
     case Registry.lookup(@process_registry, registry_pid_key(process_pid)) do
       [{^process_pid, process_name}] ->
         {:ok, process_name}
+
       [] ->
         {:error, "Process not started"}
     end
@@ -103,6 +106,7 @@ defmodule ExProcess.RunnerProcess do
     case Registry.lookup(@process_registry, registry_name_key(process_name)) do
       [{pid, pid}] ->
         {:ok, pid}
+
       [] ->
         {:error, "Process not started"}
     end

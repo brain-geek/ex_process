@@ -1,5 +1,6 @@
 defmodule ExProcess.ProcessRunnerSteps.NewTickStarter do
   use ExProcess.ProcessRunnerStep
+
   @moduledoc """
     This is part of Process Runner which sets all next tick
     acive nodes to be active in the new tick

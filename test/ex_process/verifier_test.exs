@@ -5,7 +5,8 @@ defmodule ExProcess.VerifierTest do
     test "accepts definitely correct .bpmn files" do
       ["no_start", "small", "start-parallel-end", "only_start_looped", "start-parallel-end"]
       |> Enum.each(fn fixture_name ->
-        result = fixture_name
+        result =
+          fixture_name
           |> ExProcess.TestTools.fixture()
           |> ExProcess.Bpmn.Parser.parse()
           |> elem(1)

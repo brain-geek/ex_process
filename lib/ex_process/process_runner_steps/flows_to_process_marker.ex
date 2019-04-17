@@ -1,5 +1,6 @@
 defmodule ExProcess.ProcessRunnerSteps.FlowsToProcessMarker do
   use ExProcess.ProcessRunnerStep
+
   @moduledoc """
     This is part of Process Runner which marks unconditional flows to process this tick
   """

@@ -32,9 +32,7 @@ defmodule ExProcess.ConditionalFlowExampleTest do
     assert_receive %ExProcess.PubSub.Message{channel: :conditional_example, info: :it_worked}
 
     # Last activated Task should still be active
-    assert(
-      ExProcess.RunnerProcess.current_state("ConditionalExample") == {:ok, ["Task_0nwel46"]}
-    )
+    assert(ExProcess.RunnerProcess.current_state("ConditionalExample") == {:ok, ["Task_0nwel46"]})
   end
 
   test "when condition evaluated to false, flow doesn't execute" do
@@ -49,8 +47,6 @@ defmodule ExProcess.ConditionalFlowExampleTest do
     refute_receive %ExProcess.PubSub.Message{channel: :conditional_example, info: :it_worked}
 
     # Last activated Task should still be active
-    assert(
-      ExProcess.RunnerProcess.current_state("ConditionalExample") == {:ok, ["Task_0kb72qb"]}
-    )
+    assert(ExProcess.RunnerProcess.current_state("ConditionalExample") == {:ok, ["Task_0kb72qb"]})
   end
 end

@@ -34,7 +34,7 @@ defmodule ExProcess.OneEventOneHandlerEndExampleTest do
     # It should proceed to running handler and therefor receive this message
     assert_receive %ExProcess.PubSub.Message{channel: {:test, :test}, info: %{it: :works}}
 
-    :timer.sleep 50
+    :timer.sleep(50)
 
     # It has flows to end, so this ends ending with empty state
     assert(ExProcess.RunnerProcess.current_state("Flow") == {:ok, []})

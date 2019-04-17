@@ -1,5 +1,6 @@
 defmodule ExProcess.ProcessRunnerSteps.EndEventFinisher do
   use ExProcess.ProcessRunnerStep
+
   @moduledoc """
     This is part of Process Runner which prevents activation of end events, as
     they shouldn't be activated ever

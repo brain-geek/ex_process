@@ -21,9 +21,7 @@ defmodule ExProcess.ExclusiveGatewayLogicExampleTest do
       })
 
     # Initial state would be start node
-    assert(
-      ExProcess.RunnerProcess.current_state(@process_name) == {:ok, ["StartEvent_168gadc"]}
-    )
+    assert(ExProcess.RunnerProcess.current_state(@process_name) == {:ok, ["StartEvent_168gadc"]})
 
     # Request new tick processing
     ExProcess.RunnerProcess.force_tick(@process_name)
@@ -54,9 +52,7 @@ defmodule ExProcess.ExclusiveGatewayLogicExampleTest do
       })
 
     # Initial state would be start node
-    assert(
-      ExProcess.RunnerProcess.current_state(@process_name) == {:ok, ["StartEvent_168gadc"]}
-    )
+    assert(ExProcess.RunnerProcess.current_state(@process_name) == {:ok, ["StartEvent_168gadc"]})
 
     # On the second tick we have both tasks activated
     ExProcess.RunnerProcess.force_tick(@process_name)
@@ -90,9 +86,7 @@ defmodule ExProcess.ExclusiveGatewayLogicExampleTest do
       })
 
     # Initial state would be start node
-    assert(
-      ExProcess.RunnerProcess.current_state(@process_name) == {:ok, ["StartEvent_168gadc"]}
-    )
+    assert(ExProcess.RunnerProcess.current_state(@process_name) == {:ok, ["StartEvent_168gadc"]})
 
     # On the second tick we have the task B activated
     ExProcess.RunnerProcess.force_tick(@process_name)
