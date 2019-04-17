@@ -23,7 +23,7 @@ defmodule ExProcess.Verifier.Integrity do
 
     diff = uniq_linked_ids -- uniq_elements
 
-    if length(diff) == 0 do
+    if Enum.empty?(diff) do
       :ok
     else
       {:error, "missing elements found", diff}
